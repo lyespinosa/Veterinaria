@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
+
+</head>
+
+<body>
+
+    <div id="main">
+
+        <header id="header">
+            <h3 class="header__item" id="header__tittle">Veterinaria "Los ingenieros"</h3>
+        </header>
+
+        <section class="" id="container">
+
+            <div class="card bg-white text-black section-login" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+                    <form action="/auth " method="POST" id="sesionForm">
+
+                        <h2 class=" fw-bold mb-2 text-uppercase">Bienvenido</h2>
+
+                        <p class="text-50 mb-5">Ingresa tu Contraseña
+
+                        <div class="form-outline form-white mb-4">
+                            <input type="text" name="usuario" id="usuario" class="form-control form-control-lg" required />
+                            <label class="form-label" for="typePasswordX">Usuario</label>
+                        </div>
+                        
+                        <div class="form-outline form-white mb-4">
+                            <input type="password" name="contrasena" id="contrasena" class="form-control form-control-lg" required />
+                            <label class="form-label" for="typePasswordX">Contraseña</label>
+                        </div>
+
+
+                        <button class="btn btn-primary btn-outline-white btn-lg px-5" type="submit">Ingresar</button>
+
+
+
+                    </form>
+
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <% if(typeof alert != "undefined") { %>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle %>',
+                text: '<%= alertMessage %>',
+                icon: '<%= alertIcon %>',
+                showConfirmButton: <%= showConfirmButton %>,
+                timer: <%= timer %>
+            }).then(()=>{
+                window.location='/<%= ruta %>'
+            })
+        </script>
+        <% } %>
+</body>
+
+</html>

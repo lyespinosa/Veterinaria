@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
+
+</head>
+
+<body>
+
+    <div id="main">
+
+        <header id="header">
+            <h3 class="header__item " id="header__tittle">
+                <span id="user-container">
+
+                    <h5 id="user__txt" class="font-white"></h5>
+
+                </span>
+                Veterinaria
+            </h3>
+        </header>
+
+
+        <div class="" id="container">
+
+            <div class="opc-menu">
+
+                <a class="opcion opcion-1" href="/agregar">
+                    <img src="resources/images/agregar.png" alt="">
+                    <p>Registrar nueva mascota</p>
+                </a>
+                <a class="opcion opcion-2" href="/ver">
+                    <img src="resources/images/ver.png" alt="">
+                    <p>Ver todos los registros</p>
+                </a>
+                <a class="opcion opcion-3" href="/eliminar">
+                    <img src="resources/images/eliminar.png" alt="">
+                    <p>Eliminar registro</p>
+                </a>
+                <a class="opcion opcion-4" id="opcion-4" href="/config">
+                    <img src="resources/images/config.png" alt="">
+                    <p>ADMINISTRAR CUENTAS</p>
+                </a>
+
+
+            </div>
+
+            <div class="btn-container-t">
+                <a class="a-back" href="logout"><button class="back btn btn-primary btn-outline-white btn-lg px-5" type="button">Cerrar sesion</button></a>
+            </div>
+        </div>
+    </div>
+
+   
+   
+    <script>
+        if (<%= root %> == true) {
+
+
+            var config = document.getElementById('opcion-4');
+            config.style.display = 'block';
+
+        }
+
+    </script>
+
+</body>
+
+</html>
