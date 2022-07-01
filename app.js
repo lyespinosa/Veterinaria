@@ -39,219 +39,10 @@ app.use(session({
 //Invocar modulo de base de datos
 const connection = require('./database/db');
 
-
-/*Establecer rutas (era de prueba por eso la borrado,
-                    hacia conflicto con con line: 85)
-app.get('/', (req, res) =>{
-    res.render('index');
-})*/
-
-app.get('/saldo', (req, res) => {
-    if (req.session.loggedin) {
-
-        name = req.session.name;
-
-        console.log(req.session.saldo);
-        res.render('saldo', {
-            login: true,
-            saldo: req.session.saldo,
-            name: name
-        });
-    } else {
-        res.redirect('/');
-    }
-})
-
 app.get('/login', (req, res) => {
-    res.render('login', );
+    res.render('login');
 })
 
-app.get('/retiro', (req, res) => {
-    if (req.session.loggedin) {
-        name = req.session.name;
-        console.log(req.session.saldo);
-        res.render('retiro', {
-            name: name
-        });
-    } else {
-        res.redirect('/');
-    }
-})
-
-app.post('/retirando', (req, res) => {
-
-    console.log(req.session.rfc);
-    const dineroRetirado = req.body.retirado;
-    console.log(dineroRetirado);
-
-
-    rfc = req.session.rfc;
-    nip = req.session.nip;
-    saldo = req.session.saldo;
-    console.log(req.session.saldo);
-
-    if (dineroRetirado > saldo) {
-        res.render('retiro', {
-            alert: true,
-            alertTitle: "Error",
-            alertMessage: "Saldo insuficiente",
-            alertIcon: "error",
-            showConfirmButton: false,
-            timer: 2500,
-            ruta: ''
-        });
-    } else if (dineroRetirado < 0) {
-        res.render('retiro', {
-            alert: true,
-            alertTitle: "Error",
-            alertMessage: "No se permiten valores negativos",
-            alertIcon: "error",
-            showConfirmButton: false,
-            timer: 2500,
-            ruta: ''
-        });
-    } else if (dineroRetirado >= 200000) {
-        res.render('retiro', {
-            alert: true,
-            alertTitle: "Error",
-            alertMessage: "El cajero no cuenta con la cantidad suficiente",
-            alertIcon: "error",
-            showConfirmButton: false,
-            timer: 2500,
-            ruta: ''
-        });
-    } else {
-        connection.query('UPDATE usuario SET SALDO = SALDO - ? WHERE RFC = ?', [dineroRetirado, rfc], (error, results) => {
-            connection.query('SELECT * FROM usuario WHERE NIP = ?', [nip], (error, results) => {
-
-                req.session.saldo = results[0].SALDO;
-                res.render('retiro', {
-                    alert: true,
-                    alertTitle: "Has retirado " + dineroRetirado,
-                    alertMessage: "No olvides tomarlo, presiona aceptar para continuar",
-                    alertIcon: "success",
-                    showConfirmButton: true,
-                    timer: false,
-                    ruta: ''
-                });
-
-            })
-
-        })
-    }
-
-})
-
-
-
-app.get('/deposito', (req, res) => {
-    if (req.session.loggedin) {
-        name = req.session.name;
-        console.log(req.session.saldo);
-        res.render('deposito', {
-            name: name
-        });
-    } else {
-        res.redirect('/');
-    }
-})
-
-
-
-app.post('/depositando', (req, res) => {
-
-    console.log(req.session.rfc);
-    const dineroDepositado = req.body.depositado;
-    console.log(dineroDepositado);
-
-
-    rfc = req.session.rfc;
-    nip = req.session.nip;
-    console.log(req.session.saldo);
-
-    if (dineroDepositado > 25000) {
-        res.render('retiro', {
-            alert: true,
-            alertTitle: "Error",
-            alertMessage: "Puedes una cantidad maxima de 50 billetes (billete mas grande $500)",
-            alertIcon: "error",
-            showConfirmButton: false,
-            timer: 2500,
-            ruta: ''
-        });
-    } else {
-        connection.query('UPDATE usuario SET SALDO = SALDO + ? WHERE RFC = ?', [dineroDepositado, rfc], (error, results) => {
-            connection.query('SELECT * FROM usuario WHERE NIP = ?', [nip], (error, results) => {
-
-                req.session.saldo = results[0].SALDO;
-                res.render('deposito', {
-                    alert: true,
-                    alertTitle: "Ejecutando",
-                    alertMessage: "Dinero depositado: " + dineroDepositado,
-                    alertIcon: "success",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    ruta: ''
-                });
-
-            })
-
-        })
-
-    }
-})
-
-
-app.get('/transferencia', (req, res) => {
-    if (req.session.loggedin) {
-        name = req.session.name;
-        console.log(req.session.saldo);
-        res.render('transferencia', {
-            name: name
-        });
-    } else {
-        res.redirect('/');
-    }
-})
-
-app.post('/transfiriendo', (req, res) => {
-
-    console.log(req.session.rfc);
-    const dineroDepositado = req.body.monto;
-    const otraCuenta = req.body.tarjeta;
-    console.log(dineroDepositado);
-
-
-    rfc = req.session.rfc;
-    nip = req.session.nip;
-    console.log(req.session.saldo);
-
-    connection.query('UPDATE usuario SET SALDO = SALDO - ? WHERE RFC = ?', [dineroDepositado, rfc], (error, results) => {
-        connection.query('UPDATE usuario SET SALDO = SALDO + ? WHERE NOCUENTA = ?', [dineroDepositado, otraCuenta], (error, results) => {
-            connection.query('SELECT * FROM usuario WHERE NIP = ?', [nip], (error, results) => {
-
-                req.session.saldo = results[0].SALDO;
-                res.render('transferencia', {
-                    alert: true,
-                    alertTitle: "Ejecutando",
-                    alertMessage: "Dinero transferido: " + dineroDepositado,
-                    alertIcon: "success",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    ruta: ''
-                });
-
-            })
-
-        })
-
-    })
-
-})
-
-
-
-//Autentificacion
 app.post('/auth', (req, res) => {
     const contrasena = req.body.contrasena;
     const usuario = req.body.usuario;
@@ -286,6 +77,58 @@ app.post('/auth', (req, res) => {
         })
     }
 
+})
+
+app.get('/register', (req,res)=>{
+    res.render('register')
+})
+
+app.post('/registro', async (req, res) => {
+    const usuario = req.body.usuario;
+    const contrasena = req.body.contrasena;
+    console.log(cuenta);
+    if (nombre && contrasena) {
+        connection.query('INSERT INTO administradores (usuario,contrasena) VALUES (?,?)', [usuario, contrasena], (req, results) => {
+            res.render('administrador', {
+                alert: true,
+                alertTitle: "Registro",
+                alertMessage: "Registro exitoso",
+                alertIcon: "success",
+                showConfirmButton: true,
+                timer: false,
+                ruta: 'administrador'
+            })
+        })
+    }
+    else {
+        res.render('registro', {
+            alert: true,
+            alertTitle: "Error",
+            alertMessage: "Por favor, ingrese datos",
+            alertIcon: "error",
+            showConfirmButton: true,
+            timer: false,
+            ruta: 'administrador'
+        })
+    }
+})
+
+app.post('/eliminar',(req,res)=>{
+    const usuario = req.body.usuario;
+    console.log(nombre)
+    if(nombre){
+        connection.query('DELETE FROM administradores WHERE usuario = ?', [usuario],(req,results)=>{
+            res.render('administrador', {
+                alert: true,
+                alertTitle: "Eliminar usuario",
+                alertMessage: "Elmininacion de usuario exitosa",
+                alertIcon: "success",
+                showConfirmButton: true,
+                timer: false,
+                ruta: 'administrador'
+            })
+        })
+    }
 })
 
 //autenticar paginas
