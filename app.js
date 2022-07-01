@@ -79,6 +79,22 @@ app.post('/auth', (req, res) => {
 
 })
 
+app.get('/agregar', (req,res)=>{
+    if (req.session.loggedin) {
+
+          res.render('agregar', {
+              login: true,
+              root: root
+          });
+    }
+      else{
+          res.render('login', {
+              login: false
+              
+          })
+      }
+})
+
 app.get('/register', (req,res)=>{
     res.render('register')
 })

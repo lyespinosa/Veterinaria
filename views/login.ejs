@@ -13,9 +13,17 @@
 
     <div id="main">
 
-        <header id="header">
-            <h3 class="header__item" id="header__tittle">Veterinaria "Los ingenieros"</h3>
-        </header>
+        <nav class="container-fluid container-fluid-login navbar-expand-lg navbar text-white" >
+
+            <img src="/resources/images/logo-nav.png" style="width: 50px;" alt="logo">
+
+            <div class="xd">
+                <h3 ><strong>Veterinaria</strong></h3>
+                <h5>Los ingenieros</h5>
+
+            </div>
+
+        </nav>
 
         <section class="" id="container">
 
@@ -28,12 +36,14 @@
                         <p class="text-50 mb-5">Ingresa tu Contraseña
 
                         <div class="form-outline form-white mb-4">
-                            <input type="text" name="usuario" id="usuario" class="form-control form-control-lg" required />
+                            <input type="text" name="usuario" id="usuario" class="form-control form-control-lg"
+                                required />
                             <label class="form-label" for="typePasswordX">Usuario</label>
                         </div>
-                        
+
                         <div class="form-outline form-white mb-4">
-                            <input type="password" name="contrasena" id="contrasena" class="form-control form-control-lg" required />
+                            <input type="password" name="contrasena" id="contrasena"
+                                class="form-control form-control-lg" required />
                             <label class="form-label" for="typePasswordX">Contraseña</label>
                         </div>
 
@@ -51,7 +61,7 @@
 
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <% if(typeof alert != "undefined") { %>
+    <% if(typeof alert !="undefined" ) { %>
         <script>
             Swal.fire({
                 title: '<%= alertTitle %>',
@@ -59,9 +69,9 @@
                 icon: '<%= alertIcon %>',
                 showConfirmButton: <%= showConfirmButton %>,
                 timer: <%= timer %>
-            }).then(()=>{
-                window.location='/<%= ruta %>'
-            })
+            }).then(() => {
+                    window.location = '/<%= ruta %>'
+                })
         </script>
         <% } %>
 </body>
