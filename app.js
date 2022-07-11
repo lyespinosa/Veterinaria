@@ -79,6 +79,10 @@ app.post('/auth', (req, res) => {
 
 })
 
+app.get('/administrador', (req,res)=>{
+    res.render('administrador')
+})
+
 app.get('/agregar', (req,res)=>{
     if (req.session.loggedin) {
 

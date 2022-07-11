@@ -7,6 +7,66 @@
     <title>Cuentas</title>
 </head>
 <body>
-    
+    <div id="main">
+        <nav class="container-fluid container-fluid-login navbar-expand-lg navbar text-white" >
+
+            <img src="/resources/images/logo-nav.png" style="width: 50px;" alt="logo">
+
+            <div class="xd">
+                <h3 ><strong>Veterinaria</strong></h3>
+                <h5>Los ingenieros</h5>
+
+            </div>
+
+        </nav>
+        <div id="container">
+            <div class="card bg-white text-black section-login" style="border-radius: 1rem;">
+                <div class="izquierda">
+                    <form>
+                        <div class="mb-1">
+                            <label for="txt_usuario" class="form-label">Ingrese el nombre del nuevo usuario</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nuevo usuario" required=""/>
+                        </div>
+                        <div class="mb-2">
+                            <label for="contrasena" class="form-label">Ingrese la contraseña del usuario</label>
+                            <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese una contraseña" required/>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Es administrador
+                            </label>
+                          </div>
+                    </form>
+                </div>
+                <div class="derecha">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Contraseña</th>
+                            <th scope="col">¿Es administrador?</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>Leo</td>
+                            <td>1234</td>
+                            <td>Si</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>Diego</td>
+                            <td>1209</td>
+                            <td>No</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -223,5 +223,17 @@ body {
     font-size: 70%;
   }
 }
+.izquierda{
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  width: 50%;
+}
+.derecha{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 50%;
+}
 
 /*# sourceMappingURL=style.css.map */
