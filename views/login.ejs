@@ -3,32 +3,35 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Index</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/login.css">
+
 
 </head>
 
 <body>
 
-    <div id="main">
+    <div class="main" id="main">
 
-        <nav class="container-fluid container-fluid-login navbar-expand-lg navbar text-white" >
 
-            <img src="/resources/images/logo-nav.png" style="width: 50px;" alt="logo">
 
-            <div class="xd">
-                <h3 ><strong>Veterinaria</strong></h3>
-                <h5>Los ingenieros</h5>
+        <div class="body">
 
-            </div>
+            <nav class="navbar navbar-login">
+                <img src="/resources/images/logo-nav.png" alt="logo">
+                <div class="navbar-text">
+                    <h3><strong>Veterinaria</strong></h3>
+                    <h5>Los ingenieros</h5>
+                </div>
+            </nav>
 
-        </nav>
-
-        <section class="" id="container">
-
-            <div class="card bg-white text-black section-login" style="border-radius: 1rem;">
-                <div class="card-body p-5 text-center">
+            <div class="section-login">
+                <div class="login">
                     <form action="/auth " method="POST" id="sesionForm">
 
                         <h2 class=" fw-bold mb-2 text-uppercase">Bienvenido</h2>
@@ -57,7 +60,7 @@
 
                 </div>
             </div>
-        </section>
+        </div>
 
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

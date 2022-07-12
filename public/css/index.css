@@ -1,0 +1,67 @@
+
+  
+  .opc-menu {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
+      margin-top: 35vh;
+      align-items: stretch;
+      }
+
+  .opcion {
+      min-height: 12vw;
+      border-radius: 5px;
+      background: white;
+      display: block;
+      text-decoration: none;
+      color: black;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      width: 12vw;
+      padding: 0 0.5vw;
+      
+
+  }
+
+  .opcion:hover {
+      color: black;
+      filter: brightness(0.9);
+  }
+
+  .opcion p {
+      text-align: center;
+      margin: 0;
+      font-size: 1.5vw;
+  }
+
+  .opcion img {
+      display: block;
+      margin: auto;
+      width: 60%;
+      padding: 10%;
+  }
+
+  .opcion-4 {
+      display: none;
+  }
+
+  .btn-container {
+      position: absolute;
+      width: 100%;
+      height: 60px;
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2%;
+      bottom: 5%;
+  }
+
+  @media screen and (max-width: 900px) {
+      .opcion {
+          width: 18vw;
+          min-height: 18vw;
+      }
+
+      .opcion p {
+          font-size: 0.8rem;
+      }
+  }

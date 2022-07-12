@@ -1,0 +1,48 @@
+
+form div{
+    margin-top: 60px;
+}
+
+.administrador-container{
+    display: flex;
+}
+
+.administrador-container > div{
+    margin: 30px;
+    padding: 20px;
+}
+
+.izquierda {
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    height: 600px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 30%;
+}
+
+.izquierda h2{
+    font-size: 1.8rem;
+}
+
+.izquierda label{
+    font-size: 1.2rem;
+}
+
+.izquierda input{
+    font-size: 1.2rem;
+}
+
+.btn{
+    font-size: 1.2rem;
+}
+
+.derecha {
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 80%;
+}
