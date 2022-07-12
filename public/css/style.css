@@ -68,7 +68,7 @@ body {
   /*contenedor principal, no le llame container porque bootstrap le pone estilos*/
   width: 85%;
   margin: auto;
-  height: 900px;
+  height: 90vh;
   background: white;
   box-shadow: rgba(0, 0, 0, 0.219) 0px 1px 4px;
   border-radius: 5px;
