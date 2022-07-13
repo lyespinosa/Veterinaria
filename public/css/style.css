@@ -4,6 +4,7 @@
   box-sizing: border-box;
   position: relative;
   font-family: "Roboto", sans-serif;
+  
 }
 
 .btn-back{
@@ -12,16 +13,12 @@
 }
 
 body {
-  background-color: #eee;
+  min-height: 1000px;
+  background-color: rgb(245, 245, 245);
 }
 
 .font-white {
   color: white;
-}
-
-.main {
-  min-height: 100vh;
-  background-color: rgb(245, 245, 245);
 }
 
 .navbar {
@@ -64,14 +61,34 @@ body {
   margin: 0;
 }
 
-.body {
+.main {
   /*contenedor principal, no le llame container porque bootstrap le pone estilos*/
   width: 85%;
   margin: auto;
-  height: 90vh;
+  height: 900px;
   background: white;
   box-shadow: rgba(0, 0, 0, 0.219) 0px 1px 4px;
   border-radius: 5px;
   padding: 20px;
   padding-top: 100px;
+}
+
+@media screen and (orientation: portrait){
+html{
+  overflow-y: hidden;
+
+}
+
+  body {
+    min-height: 95vh;
+    background-color: white;
+  }
+
+  .main{
+    box-shadow: none;
+    width: 100%;
+    height: 95vh;
+  }
+
+
 }

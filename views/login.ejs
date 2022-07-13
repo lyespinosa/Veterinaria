@@ -16,11 +16,11 @@
 
 <body>
 
-    <div class="main" id="main">
 
 
 
-        <div class="body">
+
+        <div class="main">
 
             <nav class="navbar navbar-login">
                 <img src="/resources/images/logo-nav.png" alt="logo">
@@ -30,24 +30,24 @@
                 </div>
             </nav>
 
-            <div class="section-login">
+           
                 <div class="login">
                     <form action="/auth " method="POST" id="sesionForm">
 
-                        <h2 class=" fw-bold mb-2 text-uppercase">Bienvenido</h2>
+                        <h2 class="login__item fw-bold mb-2 text-uppercase">Bienvenido</h2>
 
-                        <p class="text-50 mb-5">Ingresa tu Contraseña
+                        <p class="login__item text-50 mb-5">Ingresa tu Contraseña
 
                         <div class="form-outline form-white mb-4">
-                            <input type="text" name="usuario" id="usuario" class="form-control form-control-lg"
+                            <input type="text" name="usuario" id="usuario" class="login__item form-control form-control-lg"
                                 required />
-                            <label class="form-label" for="typePasswordX">Usuario</label>
+                            <label class="login__item form-label" for="typePasswordX">Usuario</label>
                         </div>
 
                         <div class="form-outline form-white mb-4">
                             <input type="password" name="contrasena" id="contrasena"
-                                class="form-control form-control-lg" required />
-                            <label class="form-label" for="typePasswordX">Contraseña</label>
+                                class="login__item form-control form-control-lg" required />
+                            <label class="login__item form-label" for="typePasswordX">Contraseña</label>
                         </div>
 
 
@@ -59,8 +59,6 @@
 
 
                 </div>
-            </div>
-        </div>
 
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
