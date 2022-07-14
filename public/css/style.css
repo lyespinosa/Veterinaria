@@ -7,6 +7,17 @@
   
 }
 
+a{
+  text-decoration: none;
+  color: black;
+  font-size: 50px;
+}
+a:hover{
+  transition: 100ms ease;
+  color:aliceblue;
+  filter: brightness(1.2);
+}
+
 .btn-back{
   position: absolute;
   left: 30px;
@@ -23,7 +34,6 @@ body {
 
 .navbar {
   position: absolute;
-  border-radius: 5px;
   background: -webkit-linear-gradient(to right,
       #5bcebf,
       #5bcebf,
@@ -62,6 +72,7 @@ body {
 }
 
 .main {
+  overflow: hidden;
   /*contenedor principal, no le llame container porque bootstrap le pone estilos*/
   width: 85%;
   margin: auto;
