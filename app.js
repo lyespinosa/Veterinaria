@@ -66,8 +66,7 @@ app.post('/auth', (req, res) => {
             } else {
                 req.session.loggedin = true;
                 req.session.usuario = results[0].usuario;
-                req.session.es_administrador = results[0].es_administrador;
-                console.log(req.session.es_administrador)
+                req.session.administrador = results[0].administrador;
                 res.render('login', {
                     alert: true,
                     alertTitle: "Ingresando...",
@@ -101,7 +100,6 @@ app.get('/agregar', (req, res) => {
 
 app.post('/eliminar', (req, res) => {
     const usuario = req.body.usuario;
-    console.log(nombre)
     if (nombre) {
         connection.query('DELETE FROM administradores WHERE usuario = ?', [usuario], (req, results) => {
             res.render('administrador', {
@@ -137,7 +135,6 @@ app.get('/register', (req, res) => {
 app.post('/registro', async (req, res) => {
     const usuario = req.body.usuario;
     const contrasena = req.body.contrasena;
-    console.log(cuenta);
     if (nombre && contrasena) {
         connection.query('INSERT INTO administradores (usuario,contrasena) VALUES (?,?)', [usuario, contrasena], (req, results) => {
             res.render('administrador', {
@@ -169,9 +166,16 @@ app.post('/registro', async (req, res) => {
 //autenticar paginas
 app.get('/', (req, res) => {
 
-    rott =  req.session.es_administrador;
+    
 
     if (req.session.loggedin) {
+
+        root =  req.session.administrador;
+        if(root == "si"){
+            root = true;
+        }
+        console.log(root);
+
         res.render('index', {
             login: true,
             root: root

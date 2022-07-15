@@ -80,15 +80,11 @@ body {
   background: white;
   box-shadow: rgba(0, 0, 0, 0.219) 0px 1px 4px;
   border-radius: 5px;
-  padding: 20px;
   padding-top: 100px;
 }
 
 @media screen and (orientation: portrait){
-html{
-  overflow-y: hidden;
 
-}
 
   body {
     min-height: 95vh;
@@ -98,7 +94,7 @@ html{
   .main{
     box-shadow: none;
     width: 100%;
-    height: 95vh;
+    height: 1800px;
   }
 
 
