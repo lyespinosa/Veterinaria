@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-06-2022 a las 08:53:55
+-- Tiempo de generación: 16-07-2022 a las 06:40:29
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -30,16 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `administradores` (
   `usuario` varchar(30) NOT NULL,
   `contrasena` varchar(4) NOT NULL,
-  `tipo de cuenta` varchar(255) NOT NULL
+  `administrador` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `administradores`
 --
 
-INSERT INTO `administradores` (`usuario`, `contrasena`, `tipo de cuenta`) VALUES
-('alfonso', '3242', 'cuenta normal, no puede no puede borrar ni agregar cuentas'),
-('root', '9043', 'cuenta de superusuario tiene acceso a eliminar y agregar cuentas');
+INSERT INTO `administradores` (`usuario`, `contrasena`, `administrador`) VALUES
+('alfonso', '3242', 'no'),
+('diego', '4342', 'si'),
+('root', '9043', 'si');
 
 -- --------------------------------------------------------
 
