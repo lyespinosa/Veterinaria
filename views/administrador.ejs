@@ -1,92 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-MX">
 
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="/resources/images/logo-ico.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veterinaria</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/resources/css/style.css">
-  <link rel="stylesheet" href="/resources/css/administrador.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <link rel="icon" href="/resources/images/logo-ico.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veterinaria</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/administrador.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
 </head>
 
 <body>
 
-    <div class="main">
+  <div class="main">
 
-      <nav class="navbar">
-        <a class="btn-back" href="/"><i class="bi bi-arrow-left-square"></i></a>
-        <img src="/resources/images/logo-nav.png" alt="logo">
-        <div class="navbar-text">
-          <h3><strong>Veterinaria</strong></h3>
-          <h5>Los ingenieros</h5>
-        </div>
-      </nav>
+    <nav class="navbar">
+      <a class="btn-back" href="/"><i class="bi bi-arrow-left-square"></i></a>
+      <img src="/resources/images/logo-nav.png" alt="logo">
+      <div class="navbar-text">
+        <h3><strong>Veterinaria</strong></h3>
+        <h5>Los ingenieros</h5>
+      </div>
+    </nav>
 
-      <div class="administrador-container">
+    <div class="administrador-container">
 
-        <div class="izquierda">
-          <form>
-            <h2>Nuevo usuario</h2>
-            <div class="mb-1">
-              <label for="txt_usuario" class="form-label">Ingrese el nombre</label>
-              <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nuevo usuario"
-                required="" />
-            </div>
-            <div class="mb-2">
-              <label for="contrasena" class="form-label">Ingrese la contraseña</label>
-              <input type="password" class="form-control" id="contrasena" name="contrasena"
-                placeholder="Ingrese una contraseña" required />
-            </div>
-            <div class="form-check">
-              <label class="form-check-label" for="flexCheckDefault">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                Es administrador
-              </label>
-            </div>
-            <div>
-              <button class="btn btn-primary"> Agregar</button>
-            </div>
-          </form>
-        </div>
+      <div class="izquierda">
 
-        <div class="derecha">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Contraseña</th>
-                <th scope="col">¿Es administrador?</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Leo</td>
-                <td>1234</td>
-                <td>Si</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Diego</td>
-                <td>1209</td>
-                <td>No</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <form action="/adduser" method="post">
+          <h2>Nuevo usuario</h2>
+          <div class="mb-1">
+            <label for="txt_usuario" class="form-label">Ingrese el nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nuevo usuario"
+              required="" />
+          </div>
+          <div class="mb-2">
+            <label for="contrasena" class="form-label">Ingrese la contraseña</label>
+            <input type="password" class="form-control" id="contrasena" name="contrasena"
+              placeholder="Ingrese una contraseña" required />
+          </div>
+          <div class="form-check">
+            <label class="form-check-label" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="si" id="flexCheckDefault" name="check">
+              Es administrador
+            </label>
+          </div>
+          <div>
+            <button type="submit" class="btn-agregar btn btn-primary"> Agregar</button>
+          </div>
+        </form>
 
       </div>
 
+      <div class="derecha">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Contraseña</th>
+              <th>¿Es administrador?</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <th >1</th>
+              <td>Leo</td>
+              <td>1234</td>
+              <td>Si</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th >2</th>
+              <td>Diego</td>
+              <td>1209</td>
+              <td>No</td>
+              <td><button class="btn-delete btn btn-danger">Eliminar</button></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
 
   </div>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <% if(typeof alert !="undefined" ) { %>
+        <script>
+            Swal.fire({
+                title: '<%= alertTitle %>',
+                text: '<%= alertMessage %>',
+                icon: '<%= alertIcon %>',
+                showConfirmButton: <%= showConfirmButton %>,
+                timer: <%= timer %>
+            }).then(() => {
+                    window.location = '/<%= ruta %>'
+                })
+        </script>
+        <% } %>
 </body>
 
 </html>

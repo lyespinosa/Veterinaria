@@ -50,6 +50,7 @@ app.get('/login', (req, res) => {
 app.post('/auth', (req, res) => {
     const contrasena = req.body.contrasena;
     const usuario = req.body.usuario;
+    
     if (usuario && contrasena) {
         connection.query('SELECT * FROM administradores WHERE usuario = ? AND contrasena = ?', [usuario, contrasena], (error, results) => {
 
@@ -83,12 +84,62 @@ app.post('/auth', (req, res) => {
 
 })
 
+app.post('/adduser', (req, res) => {
+    const usuario = req.body.nombre;
+    const contrasena = req.body.contrasena;
+    const check = req.body.check;
+    if(check != 'si'){
+        const check = "no";
+    }
+    
+    if (usuario && contrasena) {
+        connection.query('INSERT INTO administradores (usuario, contrasena, administrador) VALUES (?, ?, ?);', [usuario, contrasena, check], (error, results) => {
+
+        
+            res.render('administrador', {
+                alert: true,
+                alertTitle: "Correcto",
+                alertMessage: "Usuario agregado",
+                alertIcon: "success",
+                showConfirmButton: true,
+                timer: false,
+                ruta: 'administrador'
+            });
+
+        })
+    }
+})
 
 app.get('/agregar', (req, res) => {
     if (req.session.loggedin) {
         res.render('agregar', {
-            login: true,
-            root: root
+            login: true
+        });
+    }
+    else {
+        res.render('login', {
+            login: false
+        })
+    }
+})
+
+app.get('/eliminar', (req, res) => {
+    if (req.session.loggedin) {
+        res.render('eliminar', {
+            login: true
+        });
+    }
+    else {
+        res.render('login', {
+            login: false
+        })
+    }
+})
+
+app.get('/ver', (req, res) => {
+    if (req.session.loggedin) {
+        res.render('ver', {
+            login: true
         });
     }
     else {
@@ -99,30 +150,34 @@ app.get('/agregar', (req, res) => {
 })
 
 app.post('/eliminar', (req, res) => {
-    const usuario = req.body.usuario;
-    if (nombre) {
-        connection.query('DELETE FROM administradores WHERE usuario = ?', [usuario], (req, results) => {
-            res.render('administrador', {
-                alert: true,
-                alertTitle: "Eliminar usuario",
-                alertMessage: "Elmininacion de usuario exitosa",
-                alertIcon: "success",
-                showConfirmButton: true,
-                timer: false,
-                ruta: 'administrador'
-            })
+    if (req.session.loggedin) {
+        res.render('eliminar', {
+            login: true
+        });
+    }
+    else {
+        res.render('login', {
+            login: false
         })
     }
 })
 
 app.get('/administrador', (req, res) => {
     if (req.session.loggedin) {
-
-        res.render('administrador')
+        if(req.session.administrador == 'si'){
+            res.render('administrador')
+        }
+        else{
+            res.render('index', {
+                alertadmin : 'true',
+                alertMessage : 'Se necesitan permisos de admin', 
+                ruta : '' 
+            })
+        }
     }
     else{
         res.render('login', {
-            login: false5
+            login: false
         })
     }
 })
@@ -174,7 +229,6 @@ app.get('/', (req, res) => {
         if(root == "si"){
             root = true;
         }
-        console.log(root);
 
         res.render('index', {
             login: true,

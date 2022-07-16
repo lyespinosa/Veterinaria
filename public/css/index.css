@@ -47,15 +47,16 @@
     display: none;
 }
 
-.btn-container {
+.btn-a-container {
     position: absolute;
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 2%;
-    bottom: 3%;
+    left: 3%;
 }
+
+.bi{
+    display: none;
+}
+
+
 
 @media only screen and (max-width: 1100px) and (orientation: portrait) {
     .opc-menu{
@@ -83,11 +84,36 @@
 
     }
 
-    .btn-container {
-        bottom: 3%;
+    .opcion-4 {
+        display: none;
     }
-    .btn-container button{
-        font-size: 2.5rem;
 
+    .btn-a-container {
+        
+        top: 15px;
+        width: 65px;
+        height: 65px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0!important;
+    }
+
+    .btn-a-container:hover {
+        filter: brightness(0.8);
+    }
+    
+    .bi{
+        color: white;
+        font-size: 2.5rem;
+        display: block;
+        padding: 0;
+        height: 65px;
+        width: 65px;
+    }
+
+    .btn-back{
+        
+        display: none;
     }
 }
