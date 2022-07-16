@@ -50,6 +50,11 @@
 .btn-a-container {
     position: absolute;
     left: 3%;
+    height: 3.3rem;
+}
+
+.btn-a-container p{
+    font-size: 1.5rem;
 }
 
 .bi{
@@ -69,8 +74,8 @@
     .opcion {
         margin: 30px;
         display: flex;
-        height: 230px;
-        width: 430px;
+        height: 280px;
+        width: 350px;
         align-items: center;
         padding: 10px 20px;
     }
@@ -89,10 +94,9 @@
     }
 
     .btn-a-container {
-        
-        top: 15px;
-        width: 65px;
-        height: 65px;
+        top: 25px;
+        width: 50px;
+        height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -104,15 +108,15 @@
     }
     
     .bi{
+
         color: white;
-        font-size: 2.5rem;
+        font-size: 2rem;
         display: block;
         padding: 0;
-        height: 65px;
-        width: 65px;
+  
     }
 
-    .btn-back{
+    .btn-back p{
         
         display: none;
     }

@@ -1,3 +1,7 @@
+body{
+    height: auto;
+}
+
 
 form div{
     margin-top: 60px;
@@ -17,6 +21,7 @@ form div{
 
 .administrador-container > div{
     padding: 20px;
+    
 }
 
 .izquierda {
@@ -27,6 +32,7 @@ form div{
     justify-content: center;
     text-align: center;
     width: 30%;
+    height: 600px;
 }
 
 .izquierda h2{
@@ -48,7 +54,9 @@ form div{
 
 
 .derecha {
-    height: 600px;
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 600px;
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.137);
     align-items: center;
@@ -56,6 +64,34 @@ form div{
     text-align: center;
     width: 65%;
 }
+
+/* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+
+.derecha::-webkit-scrollbar {
+    -webkit-appearance: none;
+    
+}
+
+.derecha::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.derecha::-webkit-scrollbar-button:increment,.derecha::-webkit-scrollbar-button {
+    display: none;
+} 
+
+
+.derecha::-webkit-scrollbar-thumb {
+    background-color: #02b4cc;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.derecha::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+
+/* * * * * * * * * * * * * * * * * * * * */
 
 td, th{
     line-height: 40px;
@@ -65,3 +101,22 @@ td, th{
     font-size: 0.7em;
 }
 
+@media screen and (orientation: portrait){
+    .administrador-container{
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        height: auto;
+        max-height: 1400px;
+        padding: 20px;
+    }
+
+    .administrador-container > div{
+            width: 100%;
+    }
+
+    thead th{
+        max-width: 72px;
+        overflow: hidden;
+    }
+
+}
