@@ -1,0 +1,22 @@
+
+
+
+
+.agregar-container{
+        margin-top: 5vh;
+        background-color: white;
+        width: 450px;
+        box-shadow: rgba(0, 0, 0, 0.623) 0px 1px 4px;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+        border-radius: 1rem;
+        text-align: center;
+    
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
