@@ -133,7 +133,7 @@ app.post('/addclient',(req,res)=>{
     const telefono = req.body.telefono
     const direccion = req.body.direccion
     if(telefono && direccion){
-        connection.query('INSERT INTO clientes (id_clientes, nombre, telefono, direccion, id_mascota) VALUES (?,?,?,?,?)',
+        connection.query('INSERT INTO clientes (id_cliente, nombre, telefono, direccion, id_mascota) VALUES (?,?,?,?,?)',
         [id_cliente,nombre,telefono,direccion,id_mascota],(err,results)=>{
             res.render('agregar-dueno',{
                 alert: true,
