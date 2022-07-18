@@ -165,9 +165,13 @@ app.post('/eliminar', (req, res) => {
 app.get('/administrador', (req, res) => {
     if (req.session.loggedin) {
         if(req.session.administrador == 'si'){
-            res.render('administrador')
             connection.query('SELECT * FROM administradores',(req,results)=>{
-                
+                res.render('administrador',{
+                    id : results.id,
+                    nombre : results.nombre,
+                    contrasena : results.contrasena,
+                    admin : results.admin
+                })
             })
         }
         else{
