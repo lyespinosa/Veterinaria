@@ -126,6 +126,33 @@ app.get('/agregar', (req, res) => {
     }
 })
 
+app.post('/addpet', (req,res)=> {
+    const id_mascota = req.body.id_mascota
+    const tipo = req.body.tipo
+    const raza = req.body.raza
+    const edad = req.body.edad
+    const nombre = req.body.informacion_adicional
+    const nombre_cliente = req.body.nombre_cliente
+    const id_cliente = req.body.id_cliente
+    const hora_ingreso = req.body.hora_ingreso
+    const dias_estancia = req.body.dias_estancia
+    const hora_salida = req.body.hora_salida
+    if(id_mascota && tipo && raza && edad && nombre && nombre_cliente && id_cliente && hora_ingreso && dias_estancia && hora_salida){
+        connection.query('INSERT INTO mascotas (id_mascota, tipo, raza, edad, nombre, nombre_cliente, id_cliente, hora_ingreso, dias_estancia, hora_salida) VALUES (?,?,?,?,?,?,?,?,?);',
+        [id_mascota,tipo,raza,edad,nombre,nombre_cliente,id_cliente,hora_ingreso,dias_estancia,hora_salida], (res,results)=>{
+            res.render('agregar',{
+                alert: true,
+                    alertTitle: "Agregado",
+                    alertMessage: "Mascota agregada correctamente, verifique los datos",
+                    alertIcon: "success",
+                    showConfirmButton: false,
+                    timer: 3500,
+                    ruta: 'ver'
+            })
+        })
+    }
+})
+
 app.get('/ver', (req, res) => {
     if (req.session.loggedin) {
         res.render('ver', {
