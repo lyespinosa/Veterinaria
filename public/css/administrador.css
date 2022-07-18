@@ -56,7 +56,7 @@ form div{
 .derecha {
     overflow: hidden;
     overflow-y: scroll;
-    max-height: 600px;
+    height: 600px;
     border-radius: 10px;
     border: 1px solid rgba(0, 0, 0, 0.137);
     align-items: center;
@@ -102,11 +102,11 @@ td, th{
 }
 
 @media screen and (orientation: portrait){
+
     .administrador-container{
         flex-direction: column-reverse;
         justify-content: flex-end;
-        height: auto;
-        max-height: 1400px;
+        height: 1400px;
         padding: 20px;
     }
 
@@ -117,6 +117,17 @@ td, th{
     thead th{
         max-width: 72px;
         overflow: hidden;
+    }
+
+    .derecha{
+        height: auto;
+        max-height: 600px;
+    }
+    .izquierda{
+        margin-top: 20px;
+    }
+    .main{
+        height: auto;
     }
 
 }
