@@ -2,18 +2,18 @@
 <html lang="es-MX">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/resources/images/logo-ico.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Veterinaria</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" href="/resources/css/administrador.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+  <meta charset="UTF-8">
+  <link rel="icon" href="/resources/images/logo-ico.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veterinaria</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/resources/css/style.css">
+  <link rel="stylesheet" href="/resources/css/administrador.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -32,9 +32,8 @@
     <div class="administrador-container">
 
       <div class="izquierda">
-
-        <form action="/adduser" method="post">
-          <span>*Aun falta la autentificacion de si ya existe en usuario a crear*</span>
+        <span>*Aun falta hacer la condicion de si ya existe el usuario no se puede agregar*</span>
+          <form action="/adduser" method="post">
           <h2>Nuevo usuario</h2>
           <div class="mb-1">
             <label for="txt_usuario" class="form-label">Ingrese el nombre</label>
@@ -71,20 +70,19 @@
             </tr>
           </thead>
           <tbody>
-            <%for(let i = 0;i<id.length;i++){
-              for(let i = 0;i<nombre.length;i++){
-                for(let i = 0;i<contrasena.length<i++){
-                  for(let i = 0;i<admin.length<i++){
-                    <tr>
-                      <th>id[i]</th>
-                      <th>nombre[i]</th>
-                      <th>contrasena[i]</th>
-                      <th>admin[i]</th>
-                      </tr>
-                  }
-                }
-              }
-            } %>
+            <% if(usuarios){%>
+            <% for(i=0; i < usuarios.length; i++) {%>
+              <tr>
+                <th><%= i %></th>
+                <td><%= usuarios[i].usuario %></td>
+                <td><%= usuarios[i].contrasena %></td>
+                <td><%= usuarios[i].administrador %></td>
+                <td><%if(usuarios[i].usuario != "root" && usuarios[i].usuario != insession){ %>
+                        <button class="btn-delete btn btn-danger">Eliminar</button>
+                   <%       }%> </td>
+              </tr>
+            <% } %>
+              <% } %>
           </tbody>
         </table>
       </div>
@@ -94,19 +92,19 @@
 
   </div>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <% if(typeof alert !="undefined" ) { %>
-        <script>
-            Swal.fire({
-                title: '<%= alertTitle %>',
-                text: '<%= alertMessage %>',
-                icon: '<%= alertIcon %>',
-                showConfirmButton: <%= showConfirmButton %>,
-                timer: <%= timer %>
+  <% if(typeof alert !="undefined" ) { %>
+    <script>
+      Swal.fire({
+        title: '<%= alertTitle %>',
+        text: '<%= alertMessage %>',
+        icon: '<%= alertIcon %>',
+        showConfirmButton: <%= showConfirmButton %>,
+        timer: <%= timer %>
             }).then(() => {
-                    window.location = '/<%= ruta %>'
-                })
-        </script>
-        <% } %>
+          window.location = '/<%= ruta %>'
+        })
+    </script>
+    <% } %>
 </body>
 
 </html>

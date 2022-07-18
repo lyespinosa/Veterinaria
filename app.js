@@ -50,7 +50,7 @@ app.get('/login', (req, res) => {
 app.post('/auth', (req, res) => {
     const contrasena = req.body.contrasena;
     const usuario = req.body.usuario;
-    
+
     if (usuario && contrasena) {
         connection.query('SELECT * FROM administradores WHERE usuario = ? AND contrasena = ?', [usuario, contrasena], (error, results) => {
 
@@ -88,14 +88,15 @@ app.post('/adduser', (req, res) => {
     const usuario = req.body.nombre;
     const contrasena = req.body.contrasena;
     const check = req.body.check;
-    if(check != 'si'){
+    if (check != 'si') {
         const check = "no";
     }
-    
+
     if (usuario && contrasena) {
         connection.query('INSERT INTO administradores (usuario, contrasena, administrador) VALUES (?, ?, ?);', [usuario, contrasena, check], (error, results) => {
 
-        
+            connection.query('Select * from administradores ORDER BY administradores.id ASC;', (error, results) => {
+
             res.render('administrador', {
                 alert: true,
                 alertTitle: "Correcto",
@@ -103,9 +104,11 @@ app.post('/adduser', (req, res) => {
                 alertIcon: "success",
                 showConfirmButton: true,
                 timer: false,
-                ruta: 'administrador'
+                ruta: 'administrador',
+                usuarios: results,
+                insession: req.session.usuario
             });
-
+            })
         })
     }
 })
@@ -113,19 +116,6 @@ app.post('/adduser', (req, res) => {
 app.get('/agregar', (req, res) => {
     if (req.session.loggedin) {
         res.render('agregar', {
-            login: true
-        });
-    }
-    else {
-        res.render('login', {
-            login: false
-        })
-    }
-})
-
-app.get('/eliminar', (req, res) => {
-    if (req.session.loggedin) {
-        res.render('eliminar', {
             login: true
         });
     }
@@ -164,25 +154,26 @@ app.post('/eliminar', (req, res) => {
 
 app.get('/administrador', (req, res) => {
     if (req.session.loggedin) {
-        if(req.session.administrador == 'si'){
-            connection.query('SELECT * FROM administradores',(req,results)=>{
-                res.render('administrador',{
-                    id : results.id,
-                    nombre : results.nombre,
-                    contrasena : results.contrasena,
-                    admin : results.admin
+        if (req.session.administrador == 'si') {
+
+            connection.query('Select * from administradores ORDER BY administradores.id ASC;', (error, results) => {
+                res.render('administrador', {
+                    usuarios: results,
+                    insession: req.session.usuario
                 })
             })
+
+
         }
-        else{
+        else {
             res.render('index', {
-                alertadmin : 'true',
-                alertMessage : 'Se necesitan permisos de admin', 
-                ruta : '' 
+                alertadmin: 'true',
+                alertMessage: 'Se necesitan permisos de admin',
+                ruta: ''
             })
         }
     }
-    else{
+    else {
         res.render('login', {
             login: false
         })
@@ -197,7 +188,6 @@ app.get('/register', (req, res) => {
 app.post('/registro', async (req, res) => {
     const usuario = req.body.usuario;
     const contrasena = req.body.contrasena;
-    const admin = req.body.admin;
     if (nombre && contrasena) {
         connection.query('INSERT INTO administradores (usuario,contrasena) VALUES (?,?)', [usuario, contrasena], (req, results) => {
             res.render('administrador', {
@@ -229,12 +219,12 @@ app.post('/registro', async (req, res) => {
 //autenticar paginas
 app.get('/', (req, res) => {
 
-    
+
 
     if (req.session.loggedin) {
 
-        root =  req.session.administrador;
-        if(root == "si"){
+        root = req.session.administrador;
+        if (root == "si") {
             root = true;
         }
 
