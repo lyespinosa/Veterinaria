@@ -47,7 +47,7 @@
           </div>
           <div class="form-check">
             <label class="form-check-label" for="flexCheckDefault">
-              <input class="form-check-input" type="checkbox" value="si" id="flexCheckDefault" name="check">
+              <input class="form-check-input" type="checkbox" value="si" id="flexCheckDefault" name="admin" id="admin">
               Es administrador
             </label>
           </div>
@@ -70,8 +70,8 @@
             </tr>
           </thead>
           <tbody>
-            <% if(usuarios){%>
-            <% for(i=0; i < usuarios.length; i++) {%>
+            <% if(results){%>
+            <% for(i=0; i < results.length; i++) {%>
               <tr>
                 <th><%= i %></th>
                 <td><%= usuarios[i].usuario %></td>
