@@ -166,6 +166,9 @@ app.get('/administrador', (req, res) => {
     if (req.session.loggedin) {
         if(req.session.administrador == 'si'){
             res.render('administrador')
+            connection.query('SELECT * FROM administradores',(req,results)=>{
+                
+            })
         }
         else{
             res.render('index', {
@@ -190,6 +193,7 @@ app.get('/register', (req, res) => {
 app.post('/registro', async (req, res) => {
     const usuario = req.body.usuario;
     const contrasena = req.body.contrasena;
+    const admin = req.body.admin;
     if (nombre && contrasena) {
         connection.query('INSERT INTO administradores (usuario,contrasena) VALUES (?,?)', [usuario, contrasena], (req, results) => {
             res.render('administrador', {
