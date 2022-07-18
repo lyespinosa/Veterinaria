@@ -113,6 +113,41 @@ app.post('/adduser', (req, res) => {
     }
 })
 
+app.get('/agregar-dueno', (req,res)=>{
+    if (req.session.loggedin) {
+        res.render('agregar-dueno', {
+            login: true
+        });
+    }
+    else {
+        res.render('login', {
+            login: false
+        })
+    }
+})
+
+app.post('/addclient',(req,res)=>{
+    const nombre = req.body.nombre
+    const id_mascota = req.session.id_mascota
+    const id_cliente = req.session.id_cliente
+    const telefono = req.body.telefono
+    const direccion = req.body.direccion
+    if(telefono && direccion){
+        connection.query('INSERT INTO clientes (id_clientes, nombre, telefono, direccion, id_mascota) VALUES (?,?,?,?,?)',
+        [id_cliente,nombre,telefono,direccion,id_mascota],(err,results)=>{
+            res.render('agregar-dueno',{
+                alert: true,
+                    alertTitle: "Agregado",
+                    alertMessage: "Dueño agregado correctamente",
+                    alertIcon: "success",
+                    showConfirmButton: false,
+                    timer: 2500,
+                    ruta: 'agregar'
+            })
+        })
+    }
+})
+
 app.get('/agregar', (req, res) => {
     if (req.session.loggedin) {
         res.render('agregar', {
@@ -140,17 +175,20 @@ app.post('/addpet', (req,res)=> {
     const dias_estancia = req.body.dias_estancia
     const hora_salida = req.body.hora_salida
     if(id_mascota && tipo && raza && edad && nombre && nombre_cliente && id_cliente && hora_ingreso && dias_estancia && hora_salida){
-        connection.query('INSERT INTO mascotas (id_mascota, tipo, raza, edad, nombre, informacion,adicional, nombre_cliente, id_cliente, hora_ingreso, dias_estancia, hora_salida) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
+        connection.query('INSERT INTO mascotas (id_mascotas, tipo, raza, edad, nombre, informacion,adicional, nombre_cliente, id_cliente, hora_ingreso, dias_estancia, hora_salida) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
         [id_mascota,tipo,raza,edad,nombre,informacion_adicional,nombre_cliente,id_cliente,hora_ingreso,dias_estancia,hora_salida], (err,results)=>{
             console.log('envio datos')
+            req.session.nombre_cliente = nombre
+            req.session.id_cliente = id_cliente
+            req.session.id_mascota = id_mascota
             res.render('agregar',{
                 alert: true,
                     alertTitle: "Agregado",
                     alertMessage: "Mascota agregada correctamente, verifique los datos",
                     alertIcon: "success",
                     showConfirmButton: false,
-                    timer: 3500,
-                    ruta: 'agregar'
+                    timer: 2500,
+                    ruta: 'agregar-dueno'
             })
         })
     }
