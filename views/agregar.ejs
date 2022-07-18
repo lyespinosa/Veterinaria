@@ -32,84 +32,85 @@
 
 
         <div class="agregar-container">
-            
-            <form>
-        
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="">Id-Mascota</label>
-                        <input type="" class="form-control" id="id_mascotas" name="id_mascotas">
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="">Tipo</label>
-                        <input type="" class="form-control" id="tipo" name="tipo">
+            <form action="/addpet" method="post">
+                <div class="data1">
+                    <div class="mb-2">
+                        <label for="id_mascota" class="form-label">Id de la mascota</label>
+                        <input type="number" class="form-control" id="id_mascota" name="id_mascota"
+                            placeholder="Ingrese id" required="" />
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="">Raza</label>
-                        <input type="" class="form-control" id="raza" name="raza">
+                    <div class="mb-2">
+                        <label for="tipo" class="form-label">Tipo de mascota</label>
+                        <input type="text" class="form-control" id="tipo" name="tipo"
+                            placeholder="Ingrese una contraseña" required />
+                    </div>
+                    <div class="mb-2">
+                        <label for="raza" class="form-label">Raza de la mascota</label>
+                        <input type="text" class="form-control" id="raza" name="raza" placeholder="Ingrese raza"
+                            required="" />
+                    </div>
+                    <div class="mb-2">
+                        <label for="edad" class="form-label">Edad de la mascota</label>
+                        <input type="number" class="form-control" id="edad" name="edad"
+                            placeholder="Años" required />
+                    </div>
+                    <div class="mb-2">
+                        <label for="nombre" class="form-label">Nombre mascota</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                            placeholder="Ingrese el nombre" required="" />
                     </div>
                 </div>
-        
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="">Edad</label>
-                        <input type="" class="form-control" id="edad" name="edad">
+                <div class="data2">
+                    <div class="mb-2">
+                        <label for="informacion_adicional" class="form-label">Informacion adicional</label>
+                        <input type="text" class="form-control" id="informacion_adicional" name="informacion_adicional"
+                            placeholder="Informacion adicional" required="" />
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="">Nombre</label>
-                        <input type="" class="form-control" id="nombre" name="nombre">
+                    <div class="mb-2">
+                        <label for="id_cliente" class="form-label">Id cliente</label>
+                        <input type="number" class="form-control" id="id_cliente" name="id_cliente"
+                            placeholder="Ingrese ID" required />
+                    </div>
+                    <div class="mb-2">
+                        <label for="nombre_cliente" class="form-label">Nombre cliente</label>
+                        <input type="text" class="form-control" id="nombre_cliente" name="nombre_cliente"
+                            placeholder="Ingrese el nombre" required="" />
+                    </div>
+                    <div class="mb-2">
+                        <label for="dias_estancia" class="form-label">Dias de alojamiento</label>
+                        <input type="number" class="form-control" id="dias_estancia" name="dias_estancia"
+                            placeholder="Ingrese cuantos dias" required />
+                    </div>
+                    <div class="mb-2">
+                        <label for="hora_ingreso" class="form-label">Hora ingreso</label>
+                        <input type="text" class="form-control" id="hora_ingreso" name="hora_ingreso"
+                            placeholder="Hora de entrada required="" />
+                    </div>
+                    <div class="mb-2">
+                        <label for="hora_salida" class="form-label">Hora salida</label>
+                        <input type="text" class="form-control" id="hora_salida" name="hora_salida"
+                            placeholder="Hora de salida" required="" />
                     </div>
                 </div>
-        
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Informacion adicional</label>
-                    <textarea class="form-control" id="informacion_adicional" rows="3" name="informacion_adicional"></textarea>
-                </div>
-        
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="">Id-clientes</label>
-                        <input type="" class="form-control" id="id_mascotas" name="id_mascotas">
-
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Nombre del dueño</label>
-                    <input type="" class="form-control" id="nombre" name="nombre">
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="">Telefono</label>
-                    <input type="" class="form-control" id="telefono" name="telefono">
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Direccion</label>
-                    <textarea class="form-control" id="direccion" rows="3" name="direccion"></textarea>
-                </div> 
-
                 <button class="btn btn-primary btn-outline-white btn-lg px-5" type="submit">Ingresar</button>
-                
             </form>
-        
         </div>
 
-
-
-
-
-
-
-
-
-
-
     </div>
-
-
-    </div>
-
-
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <% if(typeof alert !="undefined" ) { %>
+    <script>
+      Swal.fire({
+        title: '<%= alertTitle %>',
+        text: '<%= alertMessage %>',
+        icon: '<%= alertIcon %>',
+        showConfirmButton: <%= showConfirmButton %>,
+        timer: <%= timer %>
+            }).then(() => {
+          window.location = '/<%= ruta %>'
+        })
+    </script>
+    <% } %>
 </body>
 
 </html>
