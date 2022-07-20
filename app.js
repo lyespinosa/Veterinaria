@@ -97,23 +97,23 @@ app.post('/adduser', (req, res) => {
 
             connection.query('Select * from administradores ORDER BY administradores.id ASC;', (error, results) => {
 
-            res.render('administrador', {
-                alert: true,
-                alertTitle: "Correcto",
-                alertMessage: "Usuario agregado",
-                alertIcon: "success",
-                showConfirmButton: true,
-                timer: false,
-                ruta: 'administrador',
-                usuarios: results,
-                insession: req.session.usuario
-            });
+                res.render('administrador', {
+                    alert: true,
+                    alertTitle: "Correcto",
+                    alertMessage: "Usuario agregado",
+                    alertIcon: "success",
+                    showConfirmButton: true,
+                    timer: false,
+                    ruta: 'administrador',
+                    usuarios: results,
+                    insession: req.session.usuario
+                });
             })
         })
     }
 })
 
-app.get('/agregar-dueno', (req,res)=>{
+/*app.get('/agregar-dueno', (req,res)=>{
     if (req.session.loggedin) {
         res.render('agregar-dueno', {
             login: true
@@ -124,9 +124,9 @@ app.get('/agregar-dueno', (req,res)=>{
             login: false
         })
     }
-})
+})*/
 
-app.post('/addclient',(req,res)=>{
+/*app.post('/addclient',(req,res)=>{
     const nombre = req.body.nombre
     const id_mascota = req.session.id_mascota
     const id_cliente = req.session.id_cliente
@@ -147,7 +147,7 @@ app.post('/addclient',(req,res)=>{
         })
     }
 })
-
+*/
 app.get('/agregar', (req, res) => {
     if (req.session.loggedin) {
         res.render('agregar', {
@@ -161,34 +161,52 @@ app.get('/agregar', (req, res) => {
     }
 })
 
-app.post('/addpet', (req,res)=> {
+app.post('/addpet', (req, res) => {
     console.log('entro')
-    const id_mascota = req.body.id_mascota
-    const tipo = req.body.tipo
+    const especie = req.body.especie
     const raza = req.body.raza
+    const mnombre = req.body.mnombre
     const edad = req.body.edad
-    const nombre = req.body.nombre
-    const informacion_adicional = req.body.informacion_adicional
-    const nombre_cliente = req.body.nombre_cliente
-    const id_cliente = req.body.id_cliente
-    const hora_ingreso = req.body.hora_ingreso
-    const dias_estancia = req.body.dias_estancia
-    const hora_salida = req.body.hora_salida
-    if(id_mascota && tipo && raza && edad && nombre && nombre_cliente && id_cliente && hora_ingreso && dias_estancia && hora_salida){
-        connection.query('INSERT INTO mascotas (id_mascotas, tipo, raza, edad, nombre, informacion,adicional, nombre_cliente, id_cliente, hora_ingreso, dias_estancia, hora_salida) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
-        [id_mascota,tipo,raza,edad,nombre,informacion_adicional,nombre_cliente,id_cliente,hora_ingreso,dias_estancia,hora_salida], (err,results)=>{
-            console.log('envio datos')
-            req.session.nombre_cliente = nombre
-            req.session.id_cliente = id_cliente
-            req.session.id_mascota = id_mascota
-            res.render('agregar',{
-                alert: true,
-                    alertTitle: "Agregado",
-                    alertMessage: "Mascota agregada correctamente, verifique los datos",
-                    alertIcon: "success",
-                    showConfirmButton: false,
-                    timer: 2500,
-                    ruta: 'agregar-dueno'
+    const adicional = req.body.adicional
+    const fecha_entrada = req.body.entrada
+    const hora = req.body.hora
+    const fecha_salida = req.body.salida
+
+    const dnombre = req.body.dnombre
+    const telefono = req.body.telefono
+    const direccion = req.body.direccion
+
+    if (dnombre) {
+        connection.query('INSERT INTO clientes (nombre, telefono, direccion) VALUES (?, ?, ?);', [dnombre, telefono, direccion], (err, results) => {
+            console.log('cliente')
+            connection.query('Select * FROM clientes ORDER BY id_cliente DESC;', (err, results) => {
+                id_cliente = results[0].id_cliente;
+                console.log(id_cliente)
+
+                console.log('** datos **')
+                console.log(especie)
+                console.log(raza)
+                console.log(edad)
+                console.log(mnombre)
+                console.log(adicional)
+                console.log(id_cliente)
+                console.log(dnombre)
+                console.log(fecha_entrada)
+                console.log(hora)
+                console.log(fecha_salida)
+
+                connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, hora, fecha_salida) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
+                [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, hora, fecha_salida], (err, results) => {
+                        res.render('agregar', {
+                            alert: true,
+                            alertTitle: "Agregado",
+                            alertMessage: "Mascota agregada correctamente",
+                            alertIcon: "success",
+                            showConfirmButton: false,
+                            timer: 2000,
+                            ruta: 'agregar'
+                        })
+                    })
             })
         })
     }

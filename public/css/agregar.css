@@ -4,37 +4,18 @@ body{
 
 
 .agregar-container{
+    padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     text-align: center;
-    margin-top: 15%;
-}
-.agregar h2{
-    font-size: 1.8rem;
+    width: 100%;
+
 }
 
-.agregar label{
-    font-size: 1.2rem;
-}
 
-.agregar input{
-    font-size: 1.2rem;
-}
 
 .btn-agregar{
-    font-size: 1.5rem;
-    width: 130px;
-}
-
-.data1{
-    display: flex;
-    justify-content: space-between;
-}
-.data2{
-    display: flex;
-    justify-content: space-between;
-}
-.mb-2{
-    padding: 20px;
+    position: absolute;
+    top: 100%;
 }
