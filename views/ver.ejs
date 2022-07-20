@@ -25,7 +25,7 @@
             <a class="btn-back" href="/"><i class="bi bi-arrow-left-square"></i></a>
             <a href="/" class="navbar-home"> 
                 <img src="/resources/images/logo-nav.png" alt="logo">
-                <div class="navbar-text">
+                <div class="">
                     <h3><strong>Veterinaria</strong></h3>
                     <h5>Los ingenieros</h5>
                 </div>
@@ -44,16 +44,24 @@
                             <th>Informacion adicional</th>
                             <th>Nombre del cliente</th>
                             <th>Id cliente</th>
-                            <th>Hora de ingreso</th>
-                            <th>Dias estancia</th>
-                            <th>Hora de salida</th>
+                            <th>Dia de ingreso</th>
+                            <th>Hora</th>
+                            <th>Dia de salida</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% if(mascotas){%>
-                            <% for(i=0; i < mascotas.length; i++) {%>
+
+                            <% function dateFormat (date) { %>
+                                
+                            <% let day = `${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;   %>
+                            <% let month = `${(date.getMonth() + 1) < 10 ? "0" : ""}${date.getMonth() + 1}`;%>
+                            <% let year = date.getFullYear();%>
+                            <% date = day + "/" + month + "/" + year; return date; } %>
+
+                            <% for(i=0; i < mascotas.length; i++) { %>
                               <tr>
-                                <th><%= i %></th>
+                                <th><%= mascotas[i].id_mascota %></th>
                                 <td><%= mascotas[i].especie %></td>
                                 <td><%= mascotas[i].raza %></td>
                                 <td><%= mascotas[i].edad %></td>
@@ -61,9 +69,9 @@
                                 <td><%= mascotas[i].informacion_adicional %></td>
                                 <td><%= mascotas[i].nombre_cliente %></td>
                                 <td><%= mascotas[i].id_cliente %></td>
-                                <td><%= mascotas[i].hora_ingreso %></td>
-                                <td><%= mascotas[i].dias_estancia %></td>
-                                <td><%= mascotas[i].hora_salida %></td>
+                                <td><%= dateFormat(mascotas[i].fecha_entrada);  %></td>
+                                <td><%= mascotas[i].hora %></td>
+                                <td><%= dateFormat(mascotas[i].fecha_salida) %></td>
                               </tr>
                             <% } %>
                               <% } %>
