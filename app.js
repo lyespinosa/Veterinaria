@@ -168,10 +168,14 @@ app.post('/addpet', (req, res) => {
     const mnombre = req.body.mnombre
     const edad = req.body.edad
     const adicional = req.body.adicional
+    var entrada = new Date (req.body.entrada)
+    var salida = new Date(req.body.salida)
     const fecha_entrada = req.body.entrada
-    const hora = req.body.hora
     const fecha_salida = req.body.salida
-
+    var fechas = entrada.getTime() - salida.getTime();
+    var dias_estancia = Math.round(fechas/(1000*60*60*24))
+    dias_estancia = dias_estancia * -1
+    var costo = 250 * dias_estancia;
     const dnombre = req.body.dnombre
     const telefono = req.body.telefono
     const direccion = req.body.direccion
@@ -190,13 +194,14 @@ app.post('/addpet', (req, res) => {
                 console.log(mnombre)
                 console.log(adicional)
                 console.log(id_cliente)
+                console.log(dias_estancia)
                 console.log(dnombre)
                 console.log(fecha_entrada)
-                console.log(hora)
+                console.log(costo)
                 console.log(fecha_salida)
 
-                connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, hora, fecha_salida) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-                [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, hora, fecha_salida], (err, results) => {
+                connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, fecha_salida, costo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
+                [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, fecha_salida, costo], (err, results) => {
                         res.render('agregar', {
                             alert: true,
                             alertTitle: "Agregado",
