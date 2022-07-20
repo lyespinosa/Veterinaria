@@ -20,20 +20,22 @@
 
   <div class="main">
 
-    <nav class="navbar">
+    <nav class="navbar navbar-login">
       <a class="btn-back" href="/"><i class="bi bi-arrow-left-square"></i></a>
-      <img src="/resources/images/logo-nav.png" alt="logo">
-      <div class="navbar-text">
-        <h3><strong>Veterinaria</strong></h3>
-        <h5>Los ingenieros</h5>
-      </div>
+      <a href="/" class="navbar-home">
+        <img src="/resources/images/logo-nav.png" alt="logo">
+        <div class="navbar-text">
+          <h3><strong>Veterinaria</strong></h3>
+          <h5>Los ingenieros</h5>
+        </div>
+      </a>
     </nav>
 
     <div class="administrador-container">
 
       <div class="izquierda">
         <span>*Aun falta hacer la condicion de si ya existe el usuario no se puede agregar*</span>
-          <form action="/adduser" method="post">
+        <form action="/adduser" method="post">
           <h2>Nuevo usuario</h2>
           <div class="mb-1">
             <label for="txt_usuario" class="form-label">Ingrese el nombre</label>
@@ -71,18 +73,28 @@
           </thead>
           <tbody>
             <% if(usuarios){%>
-            <% for(i=0; i < usuarios.length; i++) {%>
-              <tr>
-                <th><%= i %></th>
-                <td><%= usuarios[i].usuario %></td>
-                <td><%= usuarios[i].contrasena %></td>
-                <td><%= usuarios[i].administrador %></td>
-                <td><%if(usuarios[i].usuario != "root" && usuarios[i].usuario != insession){ %>
-                        <button class="btn-delete btn btn-danger">Eliminar</button>
-                   <%       }%> </td>
-              </tr>
-            <% } %>
-              <% } %>
+              <% for(i=0; i < usuarios.length; i++) {%>
+                <tr>
+                  <th>
+                    <%= i %>
+                  </th>
+                  <td>
+                    <%= usuarios[i].usuario %>
+                  </td>
+                  <td>
+                    <%= usuarios[i].contrasena %>
+                  </td>
+                  <td>
+                    <%= usuarios[i].administrador %>
+                  </td>
+                  <td>
+                    <%if(usuarios[i].usuario !="root" && usuarios[i].usuario !=insession){ %>
+                      <button class="btn-delete btn btn-danger">Eliminar</button>
+                      <% }%>
+                  </td>
+                </tr>
+                <% } %>
+                  <% } %>
           </tbody>
         </table>
       </div>

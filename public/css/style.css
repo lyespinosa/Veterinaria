@@ -9,8 +9,8 @@
 
 a{
   text-decoration: none;
-  color: black;
-  font-size: 50px;
+  color: white;
+  
 }
 
 
@@ -23,7 +23,10 @@ body {
   color: white;
 }
 
+
+
 .navbar {
+  cursor: pointer;
   position: absolute;
   background: -webkit-linear-gradient(to right,
       #5bcebf,
@@ -37,6 +40,21 @@ body {
   display: flex;
   justify-content: center;
   height: 96px;
+  padding: 0;
+}
+
+.navbar-home{
+  display: flex;
+  border-radius: 10px;
+  text-align: center;
+  padding: 0 8px;
+  
+}
+
+.navbar-home:hover{
+  background: rgba(255, 255, 255, 0.205);
+  filter: brightness(1.2);
+  
 }
 
 .navbar img {
@@ -66,7 +84,9 @@ body {
   position: absolute;
   top: 15px;
   left: 20px;
+  font-size: 50px;
 }
+
 
 .navbar .btn-back:hover{
   color: aliceblue;

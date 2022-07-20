@@ -225,7 +225,7 @@ app.get('/ver', (req, res) => {
     }
 })
 
-app.post('/eliminar', (req, res) => {
+app.get('/eliminar', (req, res) => {
     if (req.session.loggedin) {
         res.render('eliminar', {
             login: true
