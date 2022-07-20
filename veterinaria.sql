@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-07-2022 a las 20:34:25
+-- Tiempo de generación: 20-07-2022 a las 02:13:57
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -55,9 +55,17 @@ CREATE TABLE `clientes` (
   `id_cliente` int(11) NOT NULL,
   `nombre` varchar(80) NOT NULL,
   `telefono` varchar(10) NOT NULL,
-  `direccion` varchar(120) NOT NULL,
-  `id_mascota` varchar(10) NOT NULL
+  `direccion` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id_cliente`, `nombre`, `telefono`, `direccion`) VALUES
+(20, 'Leonardo', '9612428401', 'Lado oriente'),
+(21, 'Javier', '9615440033', 'Lado sur'),
+(22, 'Diego Perez', '9616362344', 'Lado Norte');
 
 -- --------------------------------------------------------
 
@@ -73,71 +81,20 @@ CREATE TABLE `mascotas` (
   `nombre` varchar(80) NOT NULL,
   `informacion_adicional` varchar(120) NOT NULL,
   `nombre_cliente` varchar(80) NOT NULL,
-  `id_cliente` varchar(10) NOT NULL,
-  `hora_ingreso` date NOT NULL,
-  `dias_estancia` int(11) NOT NULL,
-  `hora_salida` date NOT NULL
+  `id_cliente` int(10) NOT NULL,
+  `fecha_entrada` date NOT NULL,
+  `hora` time NOT NULL,
+  `fecha_salida` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Estructura Stand-in para la vista `t_vista_a`
--- (Véase abajo para la vista actual)
+-- Volcado de datos para la tabla `mascotas`
 --
-CREATE TABLE `t_vista_a` (
-`id` int(11)
-,`usuario` varchar(30)
-,`administrador` varchar(2)
-);
 
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `t_vista_b`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `t_vista_b` (
-`usuario` varchar(30)
-,`contrasena` varchar(4)
-);
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `t_vista_c`
--- (Véase abajo para la vista actual)
---
-CREATE TABLE `t_vista_c` (
-`usuario` varchar(30)
-);
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `t_vista_a`
---
-DROP TABLE IF EXISTS `t_vista_a`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_vista_a`  AS SELECT `administradores`.`id` AS `id`, `administradores`.`usuario` AS `usuario`, `administradores`.`administrador` AS `administrador` FROM `administradores``administradores`  ;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `t_vista_b`
---
-DROP TABLE IF EXISTS `t_vista_b`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_vista_b`  AS SELECT `administradores`.`usuario` AS `usuario`, `administradores`.`contrasena` AS `contrasena` FROM `administradores``administradores`  ;
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `t_vista_c`
---
-DROP TABLE IF EXISTS `t_vista_c`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `t_vista_c`  AS SELECT `administradores`.`usuario` AS `usuario` FROM `administradores``administradores`  ;
+INSERT INTO `mascotas` (`id_mascota`, `especie`, `raza`, `edad`, `nombre`, `informacion_adicional`, `nombre_cliente`, `id_cliente`, `fecha_entrada`, `hora`, `fecha_salida`) VALUES
+(20, 'Perro', 'Husky', '5 meses', 'Laila', 'Lomo cafe con negro', 'Leonardo', 20, '2022-07-19', '19:08:00', '2022-07-20'),
+(21, 'Gato', 'Angora', '8 meses', 'Cati', 'Pata derecha blanca', 'Javier', 21, '2022-07-19', '19:11:00', '2022-07-20'),
+(22, 'Hamster', 'No aplica', '1 año', 'Cacho', 'Color cafe oscuro', 'Diego Perez', 22, '2022-07-19', '19:12:00', '2022-07-21');
 
 --
 -- Índices para tablas volcadas
@@ -160,7 +117,8 @@ ALTER TABLE `clientes`
 -- Indices de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  ADD PRIMARY KEY (`id_mascota`);
+  ADD PRIMARY KEY (`id_mascota`),
+  ADD KEY `id_cliente` (`id_cliente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -176,13 +134,13 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
