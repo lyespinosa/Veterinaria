@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-07-2022 a las 02:13:57
+-- Tiempo de generación: 20-07-2022 a las 17:45:21
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -65,7 +65,13 @@ CREATE TABLE `clientes` (
 INSERT INTO `clientes` (`id_cliente`, `nombre`, `telefono`, `direccion`) VALUES
 (20, 'Leonardo', '9612428401', 'Lado oriente'),
 (21, 'Javier', '9615440033', 'Lado sur'),
-(22, 'Diego Perez', '9616362344', 'Lado Norte');
+(22, 'Diego Perez', '9616362344', 'Lado Norte'),
+(23, 'Diego', '961248743', 'Zona centro'),
+(24, 'Diego', '961248743', 'Zona centro'),
+(25, 'Diego', '961248743', 'Zona centro'),
+(26, 'Diego', '961248743', 'Zona centro'),
+(27, 'Diego', '961248743', 'Zona centro'),
+(28, 'Diego', '961248743', 'Zona centro');
 
 -- --------------------------------------------------------
 
@@ -83,18 +89,19 @@ CREATE TABLE `mascotas` (
   `nombre_cliente` varchar(80) NOT NULL,
   `id_cliente` int(10) NOT NULL,
   `fecha_entrada` date NOT NULL,
-  `hora` time NOT NULL,
-  `fecha_salida` date NOT NULL
+  `fecha_salida` date NOT NULL,
+  `costo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `mascotas`
 --
 
-INSERT INTO `mascotas` (`id_mascota`, `especie`, `raza`, `edad`, `nombre`, `informacion_adicional`, `nombre_cliente`, `id_cliente`, `fecha_entrada`, `hora`, `fecha_salida`) VALUES
-(20, 'Perro', 'Husky', '5 meses', 'Laila', 'Lomo cafe con negro', 'Leonardo', 20, '2022-07-19', '19:08:00', '2022-07-20'),
-(21, 'Gato', 'Angora', '8 meses', 'Cati', 'Pata derecha blanca', 'Javier', 21, '2022-07-19', '19:11:00', '2022-07-20'),
-(22, 'Hamster', 'No aplica', '1 año', 'Cacho', 'Color cafe oscuro', 'Diego Perez', 22, '2022-07-19', '19:12:00', '2022-07-21');
+INSERT INTO `mascotas` (`id_mascota`, `especie`, `raza`, `edad`, `nombre`, `informacion_adicional`, `nombre_cliente`, `id_cliente`, `fecha_entrada`, `fecha_salida`, `costo`) VALUES
+(20, 'Perro', 'Husky', '5 meses', 'Laila', 'Lomo cafe con negro', 'Leonardo', 20, '2022-07-19', '2022-07-20', 250),
+(21, 'Gato', 'Angora', '8 meses', 'Cati', 'Pata derecha blanca', 'Javier', 21, '2022-07-19', '2022-07-20', 250),
+(22, 'Hamster', 'No aplica', '1 año', 'Cacho', 'Color cafe oscuro', 'Diego Perez', 22, '2022-07-19', '2022-07-21', 500),
+(23, 'Gato', 'Egipcia', '3 años', 'Rex', 'No', 'Diego', 28, '2022-07-20', '2022-07-22', 500);
 
 --
 -- Índices para tablas volcadas
@@ -134,13 +141,13 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_mascota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
