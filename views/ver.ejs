@@ -31,12 +31,46 @@
                 </div>
             </a>
         </nav>
-
-
-
-    </div>
-
-
+        <div class="ver-container">
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id mascota</th>
+                            <th>Especie</th>
+                            <th>Raza</th>
+                            <th>Edad</th>
+                            <th>Nombre</th>
+                            <th>Informacion adicional</th>
+                            <th>Nombre del cliente</th>
+                            <th>Id cliente</th>
+                            <th>Hora de ingreso</th>
+                            <th>Dias estancia</th>
+                            <th>Hora de salida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(mascotas){%>
+                            <% for(i=0; i < mascotas.length; i++) {%>
+                              <tr>
+                                <th><%= i %></th>
+                                <td><%= mascotas[i].especie %></td>
+                                <td><%= mascotas[i].raza %></td>
+                                <td><%= mascotas[i].edad %></td>
+                                <td><%= mascotas[i].nombre %></td>
+                                <td><%= mascotas[i].informacion_adicional %></td>
+                                <td><%= mascotas[i].nombre_cliente %></td>
+                                <td><%= mascotas[i].id_cliente %></td>
+                                <td><%= mascotas[i].hora_ingreso %></td>
+                                <td><%= mascotas[i].dias_estancia %></td>
+                                <td><%= mascotas[i].hora_salida %></td>
+                              </tr>
+                            <% } %>
+                              <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 

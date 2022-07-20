@@ -214,9 +214,13 @@ app.post('/addpet', (req, res) => {
 
 app.get('/ver', (req, res) => {
     if (req.session.loggedin) {
-        res.render('ver', {
-            login: true
+        connection.query('SELECT * FROM mascotas;', (err,results)=>{
+            res.render('ver', {
+            login: true,
+            mascotas: results,
+            insession: req.session.usuario
         });
+        })
     }
     else {
         res.render('login', {
