@@ -10,6 +10,8 @@ body{
     justify-content: space-evenly;
     text-align: center;
     width: 100%;
+    height: 750px;
+    align-items: flex-start;
 
 }
 
@@ -17,9 +19,36 @@ body{
 
 .btn-agregar{
     position: absolute;
-    top: 100%;
+    top: 95%;
 }
 
+.agregar-container > div{
+    margin: 20px 0;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    height: 620px;
+    padding: 20px 40px;
+}
+
+@media screen and (orientation: portrait){
+
+    .agregar-container{
+        flex-direction: column;
+        height: 1200px;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .agregar-container > .dueno-container{
+        height: auto;
+    }
+    
+
+}
 
 
 

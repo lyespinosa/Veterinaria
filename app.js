@@ -40,7 +40,6 @@ app.use(session({
 //Invocar modulo de base de datos
 const connection = require('./database/db');
 
-<<<<<<< HEAD
 class Tree {
     constructor() {
         this.value = null;
@@ -99,8 +98,7 @@ function Busqueda(tree, value) {
         console.log(tree.value.mascota);
     }
 }
-=======
->>>>>>> 07f77c39ad62aa111de9dc7fed1fee19a50c7585
+
 
 
 
@@ -229,12 +227,12 @@ app.post('/addpet', (req, res) => {
     const mnombre = req.body.mnombre
     const edad = req.body.edad
     const adicional = req.body.adicional
-    var entrada = new Date (req.body.entrada)
+    var entrada = new Date(req.body.entrada)
     var salida = new Date(req.body.salida)
     const fecha_entrada = req.body.entrada
     const fecha_salida = req.body.salida
     var fechas = entrada.getTime() - salida.getTime();
-    var dias_estancia = Math.round(fechas/(1000*60*60*24))
+    var dias_estancia = Math.round(fechas / (1000 * 60 * 60 * 24))
     dias_estancia = dias_estancia * -1
     var costo = 250 * dias_estancia;
     const dnombre = req.body.dnombre
@@ -246,31 +244,11 @@ app.post('/addpet', (req, res) => {
             console.log('cliente')
             connection.query('Select * FROM clientes ORDER BY id_cliente DESC;', (err, results) => {
                 id_cliente = results[0].id_cliente;
-<<<<<<< HEAD
-
 
                 connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, fecha_salida, costo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
                     [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, fecha_salida, costo], (err, results) => {
 
-=======
-                console.log(id_cliente)
 
-                console.log('** datos **')
-                console.log(especie)
-                console.log(raza)
-                console.log(edad)
-                console.log(mnombre)
-                console.log(adicional)
-                console.log(id_cliente)
-                console.log(dias_estancia)
-                console.log(dnombre)
-                console.log(fecha_entrada)
-                console.log(costo)
-                console.log(fecha_salida)
-
-                connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, fecha_salida, costo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-                [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, fecha_salida, costo], (err, results) => {
->>>>>>> 07f77c39ad62aa111de9dc7fed1fee19a50c7585
                         res.render('agregar', {
                             alert: true,
                             alertTitle: "Agregado",
@@ -305,12 +283,12 @@ app.get('/ticket', (req, res) => {
 
 app.get('/ver', (req, res) => {
     if (req.session.loggedin) {
-        connection.query('SELECT * FROM mascotas;', (err,results)=>{
+        connection.query('SELECT * FROM mascotas;', (err, results) => {
             res.render('ver', {
-            login: true,
-            mascotas: results,
-            insession: req.session.usuario
-        });
+                login: true,
+                mascotas: results,
+                insession: req.session.usuario
+            });
         })
     }
     else {
@@ -320,7 +298,6 @@ app.get('/ver', (req, res) => {
     }
 })
 
-<<<<<<< HEAD
 
 app.post('/busqueda', (req, res) => {
 
@@ -336,33 +313,22 @@ app.post('/busqueda', (req, res) => {
 
     connection.query('SELECT * FROM mascotas WHERE id_mascota = ?;', [busqueda_id], (err, results) => {
         res.render('ver', {
-=======
-app.get('/eliminar', (req, res) => {
-    if (req.session.loggedin) {
-        connection.query('SELECT * FROM mascotas;', (err,results)=>{
-            res.render('eliminar', {
->>>>>>> 07f77c39ad62aa111de9dc7fed1fee19a50c7585
             login: true,
             mascotas: results,
             insession: req.session.usuario
         });
-        })
-    }
-    else {
-        res.render('login', {
-            login: false
-        })
-    }
+
+    })
 })
 
 app.get('/eliminar', (req, res) => {
     if (req.session.loggedin) {
-        connection.query('SELECT * FROM mascotas;', (err,results)=>{
+        connection.query('SELECT * FROM mascotas;', (err, results) => {
             res.render('eliminar', {
-            login: true,
-            mascotas: results,
-            insession: req.session.usuario
-        });
+                login: true,
+                mascotas: results,
+                insession: req.session.usuario
+            });
         })
     }
     else {
