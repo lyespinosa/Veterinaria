@@ -76,7 +76,7 @@
               <% for(i=0; i < usuarios.length; i++) {%>
                 <tr>
                   <th>
-                    <%= i %>
+                    <%= usuarios[i].id %>
                   </th>
                   <td>
                     <%= usuarios[i].usuario %>
@@ -89,7 +89,9 @@
                   </td>
                   <td>
                     <%if(usuarios[i].usuario !="root" && usuarios[i].usuario !=insession){ %>
-                      <button class="btn-delete btn btn-danger">Eliminar</button>
+                      <form action="/deleteuser" method="post">
+                      <button type="submit"  name="deleteuser" value="<%= usuarios[i].id %>" class="btn-delete btn btn-danger">Eliminar</button>
+                    </form>
                       <% }%>
                   </td>
                 </tr>

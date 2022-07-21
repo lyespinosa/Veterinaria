@@ -32,24 +32,28 @@
             </a>
         </nav>
         <div class="ver-container">
+
+            <form method="post" action="/busqueda" class="input-group mb-3 search">
+                <input type="text" name="busqueda_id" class="form-control" placeholder="Buscar mediante ID" ">
+                <button type="submit" class="input-group-text btn btn-primary" id="basic-addon2"><i class=" bi bi-search"></i></button>
+              </form>
+            
             <div class="table-container">
                 <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Id mascota</th>
-                            <th>Especie</th>
-                            <th>Raza</th>
-                            <th>Edad</th>
-                            <th>Nombre</th>
-                            <th>Informacion adicional</th>
-                            <th>Nombre del cliente</th>
-                            <th>Id cliente</th>
-                            <th>Fecha de ingreso</th>
-                            <th>Fecha de salida</th>
-                            <th>Costo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                        <tr class="tr-head">
+                            <th class="column-fixed">Id mascota</th>
+                            <th class="column-margin">Especie</th>
+                            <th >Raza</th>
+                            <th >Edad</th>
+                            <th >Nombre</th>
+                            <th >Informacion adicional</th>
+                            <th >Nombre del cliente</th>
+                            <th >Id cliente</th>
+                            <th >Fecha de ingreso</th>
+                            <th >Fecha de salida</th>
+                            <th >Costo</th>
+                        </tr>   
+                   
                         <% if(mascotas){%>
 
                             <% function dateFormat (date) { %>
@@ -58,11 +62,11 @@
                             <% let month = `${(date.getMonth() + 1) < 10 ? "0" : ""}${date.getMonth() + 1}`;%>
                             <% let year = date.getFullYear();%>
                             <% date = day + "/" + month + "/" + year; return date; } %>
-
+                                
                             <% for(i=0; i < mascotas.length; i++) { %>
-                              <tr>
-                                <th><%= mascotas[i].id_mascota %></th>
-                                <td><%= mascotas[i].especie %></td>
+                              <tr class="tr-body">
+                                <td class="column-fixed"><%= mascotas[i].id_mascota %></td>
+                                <td class="column-margin"><%= mascotas[i].especie %></td>
                                 <td><%= mascotas[i].raza %></td>
                                 <td><%= mascotas[i].edad %></td>
                                 <td><%= mascotas[i].nombre %></td>
@@ -75,8 +79,6 @@
                               </tr>
                             <% } %>
                               <% } %>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

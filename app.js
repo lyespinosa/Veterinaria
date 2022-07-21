@@ -40,12 +40,72 @@ app.use(session({
 //Invocar modulo de base de datos
 const connection = require('./database/db');
 
+class Tree {
+    constructor() {
+        this.value = null;
+        this.left = null;
+        this.right = null;
+    }
+    set(value) {
+        if (this.value) {
+            if (value.id_mascota < this.value.id_mascota) {
+                this.setLeft(value);
+            } else {
+                this.setRight(value);
+            }
+        }
+        else {
+            this.value = value;
+        }
+    }
+    setLeft(value) {
+        if (this.left) {
+            this.left.set(value);
+        } else {
+            this.left = new Tree();
+            this.left.set(value);
+        }
+    }
+    setRight(value) {
+        if (this.right) {
+            this.right.set(value);
+        } else {
+            this.right = new Tree();
+            this.right.set(value);
+        }
+    }
+}
+
+function Inorder(tree) { //raiz, luego izquierdo y al ultimo derecho
+    if (tree.left) {
+        Inorder(tree.left);
+    }
+    console.log(tree.value.nombre);
+    if (tree.right) {
+        Inorder(tree.right);
+    }
+}
+
+function Busqueda(tree, value) {
+
+    if (value < tree.value.nombre) {
+        Busqueda(tree.left, value)
+    }
+    else if (value > tree.value.nombre) {
+        Busqueda(tree.right, value)
+    }
+    else if (value == tree.value.nombre){
+        console.log(tree.value.mascota);
+    }
+}
 
 
 
 app.get('/login', (req, res) => {
     res.render('login');
 })
+
+
 
 app.post('/auth', (req, res) => {
     const contrasena = req.body.contrasena;
@@ -113,41 +173,6 @@ app.post('/adduser', (req, res) => {
     }
 })
 
-/*app.get('/agregar-dueno', (req,res)=>{
-    if (req.session.loggedin) {
-        res.render('agregar-dueno', {
-            login: true
-        });
-    }
-    else {
-        res.render('login', {
-            login: false
-        })
-    }
-})*/
-
-/*app.post('/addclient',(req,res)=>{
-    const nombre = req.body.nombre
-    const id_mascota = req.session.id_mascota
-    const id_cliente = req.session.id_cliente
-    const telefono = req.body.telefono
-    const direccion = req.body.direccion
-    if(telefono && direccion){
-        connection.query('INSERT INTO clientes (id_cliente, nombre, telefono, direccion, id_mascota) VALUES (?,?,?,?,?)',
-        [id_cliente,nombre,telefono,direccion,id_mascota],(err,results)=>{
-            res.render('agregar-dueno',{
-                alert: true,
-                    alertTitle: "Agregado",
-                    alertMessage: "Dueño agregado correctamente",
-                    alertIcon: "success",
-                    showConfirmButton: false,
-                    timer: 2500,
-                    ruta: 'agregar'
-            })
-        })
-    }
-})
-*/
 app.get('/agregar', (req, res) => {
     if (req.session.loggedin) {
         res.render('agregar', {
@@ -162,18 +187,17 @@ app.get('/agregar', (req, res) => {
 })
 
 app.post('/addpet', (req, res) => {
-    console.log('entro')
     const especie = req.body.especie
     const raza = req.body.raza
     const mnombre = req.body.mnombre
     const edad = req.body.edad
     const adicional = req.body.adicional
-    var entrada = new Date (req.body.entrada)
+    var entrada = new Date(req.body.entrada)
     var salida = new Date(req.body.salida)
     const fecha_entrada = req.body.entrada
     const fecha_salida = req.body.salida
     var fechas = entrada.getTime() - salida.getTime();
-    var dias_estancia = Math.round(fechas/(1000*60*60*24))
+    var dias_estancia = Math.round(fechas / (1000 * 60 * 60 * 24))
     dias_estancia = dias_estancia * -1
     var costo = 250 * dias_estancia;
     const dnombre = req.body.dnombre
@@ -182,26 +206,12 @@ app.post('/addpet', (req, res) => {
 
     if (dnombre) {
         connection.query('INSERT INTO clientes (nombre, telefono, direccion) VALUES (?, ?, ?);', [dnombre, telefono, direccion], (err, results) => {
-            console.log('cliente')
             connection.query('Select * FROM clientes ORDER BY id_cliente DESC;', (err, results) => {
                 id_cliente = results[0].id_cliente;
-                console.log(id_cliente)
+                
 
-                console.log('** datos **')
-                console.log(especie)
-                console.log(raza)
-                console.log(edad)
-                console.log(mnombre)
-                console.log(adicional)
-                console.log(id_cliente)
-                console.log(dias_estancia)
-                console.log(dnombre)
-                console.log(fecha_entrada)
-                console.log(costo)
-                console.log(fecha_salida)
-
-                connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, fecha_salida, costo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', 
-                [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, fecha_salida, costo], (err, results) => {
+                connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, fecha_salida, costo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
+                    [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, fecha_salida, costo], (err, results) => {
                         res.render('agregar', {
                             alert: true,
                             alertTitle: "Agregado",
@@ -218,13 +228,31 @@ app.post('/addpet', (req, res) => {
 })
 
 app.get('/ver', (req, res) => {
+
     if (req.session.loggedin) {
-        connection.query('SELECT * FROM mascotas;', (err,results)=>{
+
+        const tree = new Tree();
+
+
+
+        //Inorder(tree);
+
+        //Busqueda(tree, '7');
+
+        connection.query('SELECT * FROM mascotas ORDER BY mascotas.nombre ASC;', (err, results) => {
+
+            for (i = 0; i < results.length; i++) {
+                tree.set(results[i]);
+            }
+
+        })
+
+        connection.query('SELECT * FROM mascotas;', (err, results) => {
             res.render('ver', {
-            login: true,
-            mascotas: results,
-            insession: req.session.usuario
-        });
+                login: true,
+                mascotas: results,
+                insession: req.session.usuario
+            });
         })
     }
     else {
@@ -232,6 +260,30 @@ app.get('/ver', (req, res) => {
             login: false
         })
     }
+})
+
+
+app.post('/busqueda', (req, res) => {
+
+    const busqueda_id = req.body.busqueda_id;
+    const tree = new Tree();
+    connection.query('SELECT * FROM mascotas ORDER BY mascotas.nombre ASC;', (err, results) => {
+
+        for (i = 0; i < results.length; i++) {
+            tree.set(results[i]);
+        }
+
+    })
+
+    connection.query('SELECT * FROM mascotas WHERE id_mascota = ?;', [busqueda_id] , (err, results) => {
+        res.render('ver', {
+            login: true,
+            mascotas: results,
+            insession: req.session.usuario
+        });
+    })
+
+
 })
 
 app.get('/eliminar', (req, res) => {
@@ -275,6 +327,25 @@ app.get('/administrador', (req, res) => {
     }
 })
 
+app.post('/deleteuser', (req, res) => {
+    const deleteuser = req.body.deleteuser;
+
+    connection.query('DELETE FROM administradores WHERE administradores.id = ?;', [deleteuser], (error, results) => {
+        connection.query('Select * from administradores ORDER BY administradores.id ASC;', (error, results) => {
+            res.render('administrador', {
+                alert: true,
+                alertTitle: "Correcto",
+                alertMessage: "Usuario eliminado",
+                alertIcon: "success",
+                showConfirmButton: false,
+                timer: 2000,
+                ruta: 'administrador',
+                usuarios: results,
+                insession: req.session.usuario
+            });
+        })
+    })
+})
 
 app.get('/register', (req, res) => {
     res.render('register')
