@@ -34,7 +34,7 @@
         <div class="ver-container">
 
             <form method="post" action="/busqueda" class="input-group mb-3 search">
-                <input type="text" name="busqueda_id" class="form-control" placeholder="Buscar mediante ID" ">
+                <input type="text" name="busqueda_id" class="form-control" placeholder="Buscar mediante ID">
                 <button type="submit" class="input-group-text btn btn-primary" id="basic-addon2"><i class=" bi bi-search"></i></button>
               </form>
             
@@ -43,6 +43,7 @@
                         <tr class="tr-head">
                             <th class="column-fixed">Id mascota</th>
                             <th class="column-margin">Especie</th>
+                           
                             <th >Raza</th>
                             <th >Edad</th>
                             <th >Nombre</th>
@@ -79,6 +80,7 @@
                               </tr>
                             <% } %>
                               <% } %>
+                </table>
             </div>
         </div>
     </div>
