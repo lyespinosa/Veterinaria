@@ -31,54 +31,61 @@
                 </div>
             </a>
         </nav>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Id mascota</th>
-                    <th>Especie</th>
-                    <th>Raza</th>
-                    <th>Edad</th>
-                    <th>Nombre</th>
-                    <th>Informacion adicional</th>
-                    <th>Nombre del cliente</th>
-                    <th>Id cliente</th>
-                    <th>Fecha de ingreso</th>
-                    <th>Fecha de salida</th>
-                    <th>Costo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if(mascotas){%>
 
-                    <% function dateFormat (date) { %>
-                        
-                    <% let day = `${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;   %>
-                    <% let month = `${(date.getMonth() + 1) < 10 ? "0" : ""}${date.getMonth() + 1}`;%>
-                    <% let year = date.getFullYear();%>
-                    <% date = day + "/" + month + "/" + year; return date; } %>
 
-                    <% for(i=0; i < mascotas.length; i++) { %>
-                      <tr>
-                        <th><%= mascotas[i].id_mascota %></th>
-                        <td><%= mascotas[i].especie %></td>
-                        <td><%= mascotas[i].raza %></td>
-                        <td><%= mascotas[i].edad %></td>
-                        <td><%= mascotas[i].nombre %></td>
-                        <td><%= mascotas[i].informacion_adicional %></td>
-                        <td><%= mascotas[i].nombre_cliente %></td>
-                        <td><%= mascotas[i].id_cliente %></td>
-                        <td><%= dateFormat(mascotas[i].fecha_entrada);  %></td>
-                        <td><%= dateFormat(mascotas[i].fecha_salida) %></td>
-                        <td><%= mascotas[i].costo%></td>
-                      </tr>
-                    <% } %>
-                      <% } %>
-            </tbody>
-        </table>
+
+        <div class="table-container">
+            <table class="table">
+                    <tr class="tr-head">
+                        <th class="column-fixed">Id mascota</th>
+                        <th class="column-margin">Especie</th>
+                        <th >Raza</th>
+                        <th >Edad</th>
+                        <th >Nombre</th>
+                        <th >Nombre del cliente</th>
+                        <th >Fecha de ingreso</th>
+                        <th >Fecha de salida</th>
+                        <th >Costo</th>
+                        <th>Eliminar</th>
+                    </tr>   
+               
+                    <% if(mascotas){%>
+
+                        <% function dateFormat (date) { %>
+                            
+                        <% let day = `${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;   %>
+                        <% let month = `${(date.getMonth() + 1) < 10 ? "0" : ""}${date.getMonth() + 1}`;%>
+                        <% let year = date.getFullYear();%>
+                        <% date = day + "/" + month + "/" + year; return date; } %>
+                            
+                        <% for(i=0; i < mascotas.length; i++) { %>
+                          <tr class="tr-body">
+                            <td class="column-fixed"><%= mascotas[i].id_mascota %></td>
+                            <td class="column-margin"><%= mascotas[i].especie %></td>
+                            <td><%= mascotas[i].raza %></td>
+                            <td><%= mascotas[i].edad %></td>
+                            <td><%= mascotas[i].nombre %></td>
+                            <td><%= mascotas[i].nombre_cliente %></td>
+                            <td><%= dateFormat(mascotas[i].fecha_entrada);  %></td>
+                            <td><%= dateFormat(mascotas[i].fecha_salida) %></td>
+                            <td><%= mascotas[i].costo%></td>
+                            <td>
+                                
+                                <button type="submit"  name="deleteregister" value="" class="btn-delete btn btn-danger">Eliminar</button>
+
+
+                            </td>
+                           
+                            
+              
+
+                          </tr>
+                        <% } %>
+                          <% } %>
+            </table>
+        </div>
     </div>
 
-
-    </div>
 </body>
 
 </html>
