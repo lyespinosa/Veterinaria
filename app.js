@@ -94,7 +94,7 @@ function Busqueda(tree, value) {
     else if (value > tree.value.nombre) {
         Busqueda(tree.right, value)
     }
-    else if (value == tree.value.nombre){
+    else if (value == tree.value.nombre) {
         console.log(tree.value.mascota);
     }
 }
@@ -147,9 +147,9 @@ app.post('/auth', (req, res) => {
 app.post('/adduser', (req, res) => {
     const usuario = req.body.nombre;
     const contrasena = req.body.contrasena;
-    const check = req.body.check;
-    if (check != 'si') {
-        const check = "no";
+    var check = req.body.check;
+    if (check == undefined) {
+        check = "no";
     }
 
     if (usuario && contrasena) {
@@ -208,10 +208,11 @@ app.post('/addpet', (req, res) => {
         connection.query('INSERT INTO clientes (nombre, telefono, direccion) VALUES (?, ?, ?);', [dnombre, telefono, direccion], (err, results) => {
             connection.query('Select * FROM clientes ORDER BY id_cliente DESC;', (err, results) => {
                 id_cliente = results[0].id_cliente;
-                
+
 
                 connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, fecha_salida, costo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
                     [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, fecha_salida, costo], (err, results) => {
+
                         res.render('agregar', {
                             alert: true,
                             alertTitle: "Agregado",
@@ -219,10 +220,27 @@ app.post('/addpet', (req, res) => {
                             alertIcon: "success",
                             showConfirmButton: false,
                             timer: 2000,
-                            ruta: 'agregar'
+                            ruta: 'ticket',
                         })
                     })
+
             })
+        })
+    }
+})
+
+app.get('/ticket', (req, res) => {
+    if (req.session.loggedin) {
+        connection.query('Select * FROM mascotas ORDER BY id_cliente DESC;', (err, results) => {
+            res.render('ticket', {
+                login: true,
+                mascota: results[0]
+            });
+        })
+    }
+    else {
+        res.render('login', {
+            login: false
         })
     }
 })
@@ -275,7 +293,7 @@ app.post('/busqueda', (req, res) => {
 
     })
 
-    connection.query('SELECT * FROM mascotas WHERE id_mascota = ?;', [busqueda_id] , (err, results) => {
+    connection.query('SELECT * FROM mascotas WHERE id_mascota = ?;', [busqueda_id], (err, results) => {
         res.render('ver', {
             login: true,
             mascotas: results,

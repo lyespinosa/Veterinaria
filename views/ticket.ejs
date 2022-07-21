@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/agregar.css">
+    <link rel="stylesheet" href="/resources/css/ticket.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
 </head>
 
@@ -21,7 +22,6 @@
 
     <div class="main">
 
-<<<<<<< HEAD
         <nav class="navbar navbar-login">
             <a class="btn-back" href="/"><i class="bi bi-arrow-left-square"></i></a>
             <a href="/" class="navbar-home"> 
@@ -31,36 +31,32 @@
                     <h5>Los ingenieros</h5>
                 </div>
             </a>
-=======
-        <nav class="navbar">
-            <img src="/resources/images/logo-nav.png" alt="logo">
-            <div class="navbar-text">
-                <h3><strong>Veterinaria</strong></h3>
-                <h5>Los ingenieros</h5>
-            </div>
->>>>>>> 5055b4bd23e9d21421f4ae3aecb0e79809c91d71
         </nav>
 
 
-        <div class="agregar-container">
-            <form action="/addclient" method="post">
-                    <div class="mb-2">
-                        <label for="tipo" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre"
-                            placeholder="Ingrese el nombre" required />
-                    </div>
-                    <div class="mb-2">
-                        <label for="raza" class="form-label">Telefono</label>
-                        <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su numero"
-                            required="" />
-                    </div>
-                    <div class="mb-2">
-                        <label for="edad" class="form-label">Direccion</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion"
-                            placeholder="Direccion del dueño" required />
-                    </div>
-                <button class="btn btn-primary btn-outline-white btn-lg px-5" type="submit">Ingresar</button>
-            </form>
+        <div class="agregar-container ticket-container">
+            <div class="ticket">
+            <% function dateFormat (date) { %>
+                                
+                <% let day = `${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;   %>
+                <% let month = `${(date.getMonth() + 1) < 10 ? "0" : ""}${date.getMonth() + 1}`;%>
+                <% let year = date.getFullYear();%>
+                <% date = day + "/" + month + "/" + year; return date; } %>
+
+                <h2>Hospedaje creado</h2>
+                <h3>Dueño: <%= mascota.nombre_cliente %></h3>
+                <h3>Mascota: <%= mascota.nombre %></h3>
+                <h3>Fecha de entrada: <%= dateFormat(mascota.fecha_entrada) %></h3>
+                <h3>Fecha de salida: <%= dateFormat(mascota.fecha_salida) %></h3>
+                <% var dif = (mascota.fecha_salida.getTime() -  mascota.fecha_entrada.getTime())/(1000*60*60*24) %>
+                <h3>Dias de hospedaje: <%= dif %></h3>
+                <h3>Costo: <%= mascota.costo %></h3>
+
+               
+                <a class="btn-a-container btn-back btn btn-primary" href="/">
+                    Menu principal
+                </a>
+            </div>
         </div>
 
     </div>
