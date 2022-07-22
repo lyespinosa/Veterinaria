@@ -36,21 +36,14 @@
 
         <div class="agregar-container ticket-container">
             <div class="ticket">
-            <% function dateFormat (date) { %>
-                                
-                <% let day = `${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;   %>
-                <% let month = `${(date.getMonth() + 1) < 10 ? "0" : ""}${date.getMonth() + 1}`;%>
-                <% let year = date.getFullYear();%>
-                <% date = day + "/" + month + "/" + year; return date; } %>
+        
 
-                <h2>Hospedaje creado</h2>
-                <h3>Dueño: <%= mascota.nombre_cliente %></h3>
-                <h3>Mascota: <%= mascota.nombre %></h3>
-                <h3>Fecha de entrada: <%= dateFormat(mascota.fecha_entrada) %></h3>
-                <h3>Fecha de salida: <%= dateFormat(mascota.fecha_salida) %></h3>
-                <% var dif = (mascota.fecha_salida.getTime() -  mascota.fecha_entrada.getTime())/(1000*60*60*24) %>
-                <h3>Dias de hospedaje: <%= dif %></h3>
-                <h3>Costo: <%= mascota.costo %></h3>
+                <h2>Hospedaje finalizado</h2>
+                <h3>Dueño: <%= nombre_cliente %></h3>
+                <h3>Mascota: <%= nombre %></h3>
+                <h3>Costo: <%= costo %></h3>
+                <h3>Dias extras: <%= dias_extras %></h3>
+                <h3>Pago final: <%= total %> </h3>
 
                
                 <a class="btn-a-container btn-back btn btn-primary" href="/">

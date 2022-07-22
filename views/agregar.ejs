@@ -26,7 +26,7 @@
             <a href="/" class="navbar-home"> 
                 <img src="/resources/images/logo-nav.png" alt="logo">
                 <div class="navbar-text">
-                    <h3><strong>Veterinaria</strong></h3>
+                    <h3><strong>Veterinaria</strong><span class="span-hospedaje">(hospedaje)</span></h3>
                     <h5>Los ingenieros</h5>
                 </div>
             </a>
@@ -34,6 +34,13 @@
 
         <form action="/addpet" method="post">
         <div class="agregar-container">
+
+            <% function dateFormat (date) { %>
+                <% let day = `${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;   %>
+                <% let month = `${(date.getMonth() + 1) < 10 ? "0" : ""}${date.getMonth() + 1}`;%>
+                <% let year = date.getFullYear();%>
+                <% date = year + "-" + month + "-" + day; return date; } %>
+
             <div class="mascota-container">
                     <h3>Registro de mascota</h3>
                     <div class="mb-2">
@@ -57,12 +64,13 @@
                         <input type="text" class="form-control" id="adicional" name="adicional"required />
                     </div>
                     <div class="mb-2">
+                        <% var  datenow = dateFormat(new Date()); %>
                         <label for="fecha_entrada" class="form-label">Fecha de entrada</label>
-                        <input type="date" class="form-control" id="entrada" name="entrada"required />
+                        <input type="date" class="form-control" id="entrada" name="entrada"required min="<%=datenow%>"/>
                     </div>
                     <div class="mb-2">
                         <label for="fecha_salida" class="form-label">Fecha de salida</label>
-                        <input type="date" class="form-control" id="salida" name="salida"required />
+                        <input type="date" class="form-control" id="salida" name="salida"required min="<%=datenow%>"/>
                     </div>
                     
                 </div>

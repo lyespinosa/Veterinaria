@@ -7,9 +7,8 @@
     border: 1px solid rgba(0, 0, 0, 0.137);
     height: 600px;
     flex-direction: column;
+    justify-content: space-evenly!important;
     align-items: center;
-    justify-content: space-evenly;
-    justify-items: center;
 
 }
 
@@ -21,6 +20,7 @@
 
 @media only screen and (max-width: 1100px) and (orientation: portrait) {
     .btn-a-container{
-        top: 80%;
+        position: relative!important;
+        z-index: 0!important;
     }
 }

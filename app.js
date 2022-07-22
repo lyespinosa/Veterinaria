@@ -172,41 +172,26 @@ app.post('/adduser', (req, res) => {
     }
 })
 
-/*app.get('/agregar-dueno', (req,res)=>{
-    if (req.session.loggedin) {
-        res.render('agregar-dueno', {
-            login: true
-        });
-    }
-    else {
-        res.render('login', {
-            login: false
-        })
-    }
-})*/
+app.post('/deleteuser', (req, res) => {
+    const deleteuser = req.body.deleteuser;
 
-/*app.post('/addclient',(req,res)=>{
-    const nombre = req.body.nombre
-    const id_mascota = req.session.id_mascota
-    const id_cliente = req.session.id_cliente
-    const telefono = req.body.telefono
-    const direccion = req.body.direccion
-    if(telefono && direccion){
-        connection.query('INSERT INTO clientes (id_cliente, nombre, telefono, direccion, id_mascota) VALUES (?,?,?,?,?)',
-        [id_cliente,nombre,telefono,direccion,id_mascota],(err,results)=>{
-            res.render('agregar-dueno',{
+    connection.query('DELETE FROM administradores WHERE administradores.id = ?;', [deleteuser], (error, results) => {
+        connection.query('Select * from administradores ORDER BY administradores.id ASC;', (error, results) => {
+            res.render('administrador', {
                 alert: true,
-                    alertTitle: "Agregado",
-                    alertMessage: "Dueño agregado correctamente",
-                    alertIcon: "success",
-                    showConfirmButton: false,
-                    timer: 2500,
-                    ruta: 'agregar'
-            })
+                alertTitle: "Correcto",
+                alertMessage: "Usuario eliminado",
+                alertIcon: "success",
+                showConfirmButton: false,
+                timer: 2000,
+                ruta: 'administrador',
+                usuarios: results,
+                insession: req.session.usuario
+            });
         })
-    }
+    })
 })
-*/
+
 app.get('/agregar', (req, res) => {
     if (req.session.loggedin) {
         res.render('agregar', {
@@ -235,6 +220,9 @@ app.post('/addpet', (req, res) => {
     var dias_estancia = Math.round(fechas / (1000 * 60 * 60 * 24))
     dias_estancia = dias_estancia * -1
     var costo = 250 * dias_estancia;
+    if (dias_estancia == 0) {
+        costo = 250;
+    }
     const dnombre = req.body.dnombre
     const telefono = req.body.telefono
     const direccion = req.body.direccion
@@ -284,6 +272,7 @@ app.get('/ticket', (req, res) => {
 app.get('/ver', (req, res) => {
     if (req.session.loggedin) {
         connection.query('SELECT * FROM mascotas;', (err, results) => {
+
             res.render('ver', {
                 login: true,
                 mascotas: results,
@@ -323,7 +312,7 @@ app.post('/busqueda', (req, res) => {
 
 app.get('/eliminar', (req, res) => {
     if (req.session.loggedin) {
-        connection.query('SELECT * FROM mascotas;', (err, results) => {
+        connection.query('SELECT * FROM mascotas WHERE fecha_salida <= ?;', [new Date()], (err, results) => {
             res.render('eliminar', {
                 login: true,
                 mascotas: results,
@@ -336,6 +325,30 @@ app.get('/eliminar', (req, res) => {
             login: false
         })
     }
+})
+
+app.post('/deletepet', (req, res) => {
+    const id_mascota = req.body.id_mascota;
+
+    const nombre_cliente = req.body.nombre_cliente;
+    const nombre = req.body.nombre;
+    const fecha_salida = req.body.fecha_salida;
+
+    const costo = req.body.costo;
+    const dias_extras = req.body.dias_extras;
+    const total = parseInt(costo) + parseInt((250 * dias_extras));
+
+    connection.query('DELETE FROM mascotas WHERE mascotas.id_mascota = ?;', [id_mascota], (error, results) => {
+            res.render('ticketeliminado', {
+                nombre_cliente: nombre_cliente,
+                nombre: nombre,
+                fecha_salida: fecha_salida,
+                costo: costo,
+                dias_extras: dias_extras,
+                total: total,
+                insession: req.session.usuario
+            });
+    })
 })
 
 app.get('/administrador', (req, res) => {

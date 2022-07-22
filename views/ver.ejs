@@ -26,7 +26,7 @@
             <a href="/" class="navbar-home"> 
                 <img src="/resources/images/logo-nav.png" alt="logo">
                 <div class="">
-                    <h3><strong>Veterinaria</strong></h3>
+                    <h3><strong>Veterinaria</strong><span class="span-hospedaje">(hospedaje)</span></h3>
                     <h5>Los ingenieros</h5>
                 </div>
             </a>
@@ -49,21 +49,20 @@
                             <th >Nombre</th>
                             <th >Informacion adicional</th>
                             <th >Nombre del cliente</th>
-                            <th >Id cliente</th>
                             <th >Fecha de ingreso</th>
                             <th >Fecha de salida</th>
+                            <th >Dias de hospedaje</th>
                             <th >Costo</th>
                         </tr>   
                    
                         <% if(mascotas){%>
 
                             <% function dateFormat (date) { %>
-                                
                             <% let day = `${date.getDate() < 10 ? "0" : ""}${date.getDate()}`;   %>
                             <% let month = `${(date.getMonth() + 1) < 10 ? "0" : ""}${date.getMonth() + 1}`;%>
                             <% let year = date.getFullYear();%>
                             <% date = day + "/" + month + "/" + year; return date; } %>
-                                
+                               
                             <% for(i=0; i < mascotas.length; i++) { %>
                               <tr class="tr-body">
                                 <td class="column-fixed"><%= mascotas[i].id_mascota %></td>
@@ -73,9 +72,15 @@
                                 <td><%= mascotas[i].nombre %></td>
                                 <td><%= mascotas[i].informacion_adicional %></td>
                                 <td><%= mascotas[i].nombre_cliente %></td>
-                                <td><%= mascotas[i].id_cliente %></td>
                                 <td><%= dateFormat(mascotas[i].fecha_entrada);  %></td>
                                 <td><%= dateFormat(mascotas[i].fecha_salida) %></td>
+                                
+                                <% var entrada = new Date(mascotas[i].fecha_entrada) %>
+                                <% var salida = new Date(mascotas[i].fecha_salida) %>
+                                <% var fechas = salida.getTime() - entrada.getTime(); %>
+                                <% var dias_estancia = Math.round(fechas / (1000 * 60 * 60 * 24)) %>
+
+                                <td><%= dias_estancia %></td>
                                 <td><%= mascotas[i].costo%></td>
                               </tr>
                             <% } %>

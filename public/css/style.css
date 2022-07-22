@@ -80,6 +80,12 @@ body {
   margin: 0;
 }
 
+.span-hospedaje{
+  color: rgb(255, 60, 0);
+  font-size: 16px;
+  padding-left: 5px;
+}
+
 .navbar .btn-back{
   position: absolute;
   top: 15px;
@@ -89,7 +95,7 @@ body {
 
 
 .navbar .btn-back:hover{
-  color: aliceblue;
+  color: rgb(22, 22, 22);
 }
 
 .main {
