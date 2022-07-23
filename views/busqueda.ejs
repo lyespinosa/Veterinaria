@@ -18,19 +18,19 @@
 
 <body>
 
+
     <div class="main">
 
-        <nav class="navbar">
+        <nav class="navbar navbar-login">
             <a class="btn-back" href="/"><i class="bi bi-arrow-left-square"></i></a>
             <a href="/" class="navbar-home"> 
                 <img src="/resources/images/logo-nav.png" alt="logo">
-                <div class="navbar-text">
+                <div class="">
                     <h3><strong>Veterinaria</strong><span class="span-hospedaje">(hospedaje)</span></h3>
                     <h5>Los ingenieros</h5>
                 </div>
             </a>
         </nav>
-
         <div class="ver-container">
 
             <form method="post" action="/busqueda" class="input-group mb-3 search">
@@ -63,11 +63,7 @@
                                 <% let year = date.getFullYear();%>
                                 <% date = day + "/" + month + "/" + year; return date; } %>
                                
-                            <% function Inorder(tree) { //raiz, luego izquierdo y al ultimo derecho %>
-                            <%    if (tree.left) { %>
-                            <%       Inorder(tree.left); %>
-                            <%    } %>
-
+                        
                             <tr class="tr-body">
                                 <td class="column-fixed"><%= tree.value.id_mascota %></td>
                                 <td class="column-margin"><%= tree.value.especie %></td>
@@ -87,18 +83,14 @@
                                 <td><%= dias_estancia %></td>
                                 <td><%= tree.value.costo%></td>
                             </tr>
-
-
-                            <%    if (tree.right) { %>
-                            <%        Inorder(tree.right); %>
-                            <%    } %>
-                            <% } %>
-                            <% Inorder(tree) %>
                               
-                              <% } /*else {*/ %>
+                              <% } else { %>
                                
-  
-                            <%//} %>
+                                <tr class="tr-body noresults">
+                                    <td class="td-noresults" COLSPAN="11">No existe ningún hospedaje con ese id</td>
+                                </tr>
+
+                            <%} %>
                 </table>
             </div>
         </div>

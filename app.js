@@ -22,11 +22,6 @@ app.use('/resources', express.static(__dirname + '/public'));
 //establecer motor de plantillas
 app.set('view engine', 'ejs');
 
-//invocar bcryptjs
-const bcryptjs = require('bcryptjs');
-
-
-
 //var de session
 const session = require('express-session');
 app.use(session({
@@ -39,65 +34,6 @@ app.use(session({
 
 //Invocar modulo de base de datos
 const connection = require('./database/db');
-
-class Tree {
-    constructor() {
-        this.value = null;
-        this.left = null;
-        this.right = null;
-    }
-    set(value) {
-        if (this.value) {
-            if (value.id_mascota < this.value.id_mascota) {
-                this.setLeft(value);
-            } else {
-                this.setRight(value);
-            }
-        }
-        else {
-            this.value = value;
-        }
-    }
-    setLeft(value) {
-        if (this.left) {
-            this.left.set(value);
-        } else {
-            this.left = new Tree();
-            this.left.set(value);
-        }
-    }
-    setRight(value) {
-        if (this.right) {
-            this.right.set(value);
-        } else {
-            this.right = new Tree();
-            this.right.set(value);
-        }
-    }
-}
-
-function Inorder(tree) { //raiz, luego izquierdo y al ultimo derecho
-    if (tree.left) {
-        Inorder(tree.left);
-    }
-    console.log(tree.value.nombre);
-    if (tree.right) {
-        Inorder(tree.right);
-    }
-}
-
-function Busqueda(tree, value) {
-
-    if (value < tree.value.nombre) {
-        Busqueda(tree.left, value)
-    }
-    else if (value > tree.value.nombre) {
-        Busqueda(tree.right, value)
-    }
-    else if (value == tree.value.nombre) {
-        console.log(tree.value.mascota);
-    }
-}
 
 
 
@@ -269,13 +205,74 @@ app.get('/ticket', (req, res) => {
     }
 })
 
+
+class Tree {
+    constructor() {
+        this.value = null;
+        this.left = null;
+        this.right = null;
+    }
+    set(value) {
+
+        if (this.value) {
+
+            if (value.id_mascota < this.value.id_mascota) {
+                this.setLeft(value);
+            } else {
+                this.setRight(value);
+            }
+        }
+        else {
+            this.value = value;
+        }
+    }
+    setLeft(value) {
+        if (this.left) {
+            this.left.set(value);
+        } else {
+            this.left = new Tree();
+            this.left.set(value);
+        }
+    }
+    setRight(value) {
+        if (this.right) {
+            this.right.set(value);
+        } else {
+            this.right = new Tree();
+            this.right.set(value);
+        }
+    }
+}
+
+function Inorder(tree) { //raiz, luego izquierdo y al ultimo derecho
+    if (tree.left) {
+        Inorder(tree.left);
+    }
+    console.log(tree.value.nombre);
+    if (tree.right) {
+        Inorder(tree.right);
+    }
+}
+
+
+
+
+
 app.get('/ver', (req, res) => {
     if (req.session.loggedin) {
-        connection.query('SELECT * FROM mascotas;', (err, results) => {
+        connection.query('SELECT * FROM mascotas ORDER BY mascotas.nombre ASC;', (err, results) => {
+
+            req.session.tree = new Tree();
+
+            for (i = 0; i < results.length; i++) {
+                req.session.tree.set(results[i]);
+            }
+
+            console.log(req.session.tree)
 
             res.render('ver', {
                 login: true,
-                mascotas: results,
+                tree: req.session.tree,
                 insession: req.session.usuario
             });
         })
@@ -290,32 +287,67 @@ app.get('/ver', (req, res) => {
 
 app.post('/busqueda', (req, res) => {
 
-    const busqueda_id = req.body.busqueda_id;
-    const tree = new Tree();
-    connection.query('SELECT * FROM mascotas ORDER BY mascotas.nombre ASC;', (err, results) => {
+    var tree = req.session.tree;
 
-        for (i = 0; i < results.length; i++) {
-            tree.set(results[i]);
+
+    var busquedaId = req.body.busqueda_id;
+
+    console.log("mi valor sacado del search " + busquedaId + " y mi arbol " + req.session.tree)
+
+    function Busqueda(tree, value) {
+        console.log(value + "----" + tree.value.id_mascota)
+
+        if (value < tree.value.id_mascota) {
+            if (tree.left) {
+                Busqueda(tree.left, value)
+            }
+            else {
+                tree = null;
+                req.session.busqueda = tree;
+                console.log(req.session.busqueda)
+            }
         }
 
-    })
+        else if (value > tree.value.id_mascota) {
+            if (tree.right) {
+                Busqueda(tree.right, value)
+            }
+            else {
+                tree = null;
+                req.session.busqueda = tree;
+                console.log(req.session.busqueda)
+            }
+        }
 
-    connection.query('SELECT * FROM mascotas WHERE id_mascota = ?;', [busqueda_id], (err, results) => {
-        res.render('ver', {
-            login: true,
-            mascotas: results,
-            insession: req.session.usuario
-        });
+        else if (value == tree.value.id_mascota) {
 
-    })
+            req.session.busqueda = tree;
+            console.log(tree)
+
+        }
+    }
+
+    Busqueda(tree, busquedaId)
+    console.log("esto esta vacio??")
+    console.log(req.session.busqueda)
+
+    res.render('busqueda', {
+        login: true,
+        tree: req.session.busqueda,
+        insession: req.session.usuario
+    });
+
+
+
 })
 
 app.get('/eliminar', (req, res) => {
     if (req.session.loggedin) {
-        connection.query('SELECT * FROM mascotas WHERE fecha_salida <= ?;', [new Date()], (err, results) => {
+        connection.query('SELECT * FROM mascotas WHERE fecha_salida <= ? ORDER BY mascotas.fecha_salida ASC;', [new Date()], (err, results) => {
             res.render('eliminar', {
                 login: true,
                 mascotas: results,
+
                 insession: req.session.usuario
             });
         })
@@ -339,15 +371,15 @@ app.post('/deletepet', (req, res) => {
     const total = parseInt(costo) + parseInt((250 * dias_extras));
 
     connection.query('DELETE FROM mascotas WHERE mascotas.id_mascota = ?;', [id_mascota], (error, results) => {
-            res.render('ticketeliminado', {
-                nombre_cliente: nombre_cliente,
-                nombre: nombre,
-                fecha_salida: fecha_salida,
-                costo: costo,
-                dias_extras: dias_extras,
-                total: total,
-                insession: req.session.usuario
-            });
+        res.render('ticketeliminado', {
+            nombre_cliente: nombre_cliente,
+            nombre: nombre,
+            fecha_salida: fecha_salida,
+            costo: costo,
+            dias_extras: dias_extras,
+            total: total,
+            insession: req.session.usuario
+        });
     })
 })
 

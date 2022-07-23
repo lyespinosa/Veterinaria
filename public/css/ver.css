@@ -66,3 +66,14 @@ th {
     width: 50%;
     min-width: 200px;
 }
+
+.td-noresults{
+    font-size: 25px;
+    text-align: left;
+    -webkit-text-stroke: 1px gray;
+    color: white; 
+}
+
+
+
+
