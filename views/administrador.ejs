@@ -38,13 +38,11 @@
           <h2>Nuevo usuario</h2>
           <div class="mb-1">
             <label for="txt_usuario" class="form-label">Ingrese el nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nuevo usuario"
-              required="" />
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese nuevo usuario" autocomplete="off" required />
           </div>
           <div class="mb-2">
             <label for="contrasena" class="form-label">Ingrese la contraseña</label>
-            <input type="password" class="form-control" id="contrasena" name="contrasena"
-              placeholder="Ingrese una contraseña" required />
+            <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese una contraseña" autocomplete="off" required />
           </div>
           <div class="form-check">
             <label class="form-check-label" for="flexCheckDefault">
@@ -65,7 +63,7 @@
             <tr>
               <th>ID</th>
               <th>Nombre</th>
-              <th>Contraseña</th>
+              <th id="btnPass" class="btn-pass">Contraseña</th>
               <th>Administrador</th>
               <th>Eliminar</th>
             </tr>
@@ -81,7 +79,8 @@
                     <%= usuarios[i].usuario %>
                   </td>
                   <td>
-                    <%= usuarios[i].contrasena %>
+                    <p class="passView pass-hide"><%= usuarios[i].contrasena %></p>
+                    <p class="passHide" >****</p>
                   </td>
                   <td>
                     <%= usuarios[i].administrador %>
@@ -102,6 +101,20 @@
 
     </div>
 
+    <script>
+
+      var btn_pass = document.getElementById('btnPass');
+      var pass_view = document.querySelectorAll('.passView')
+      var pass_hide = document.querySelectorAll('.passHide');
+
+      btn_pass.addEventListener("click", ()=>{
+        for(let i = 0; i < pass_view.length; i++){
+          pass_view[i].classList.toggle("pass-hide")
+          pass_hide[i].classList.toggle("pass-hide")
+        }
+      });
+
+    </script>
 
   </div>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

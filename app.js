@@ -14,7 +14,6 @@ dotenv.config({
     path: './env/.env'
 });
 
-
 //directorio public
 app.use('/resources', express.static('public'));
 app.use('/resources', express.static(__dirname + '/public'));
@@ -30,13 +29,8 @@ app.use(session({
     saveUninitialzed: true
 }));
 
-
-
 //Invocar modulo de base de datos
 const connection = require('./database/db');
-
-
-
 
 app.get('/login', (req, res) => {
     res.render('login');
@@ -142,7 +136,6 @@ app.get('/agregar', (req, res) => {
 })
 
 app.post('/addpet', (req, res) => {
-    console.log('entro')
     const especie = req.body.especie
     const raza = req.body.raza
     const mnombre = req.body.mnombre
@@ -165,24 +158,22 @@ app.post('/addpet', (req, res) => {
 
     if (dnombre) {
         connection.query('INSERT INTO clientes (nombre, telefono, direccion) VALUES (?, ?, ?);', [dnombre, telefono, direccion], (err, results) => {
-            console.log('cliente')
             connection.query('Select * FROM clientes ORDER BY id_cliente DESC;', (err, results) => {
                 id_cliente = results[0].id_cliente;
 
-                connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, fecha_salida, costo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
-                    [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, fecha_salida, costo], (err, results) => {
+                connection.query('INSERT INTO mascotas (especie, raza, edad, nombre, informacion_adicional, nombre_cliente, id_cliente, fecha_entrada, fecha_salida, costo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);', [especie, raza, edad, mnombre, adicional, dnombre, id_cliente, fecha_entrada, fecha_salida, costo], (err, results) => {
 
 
-                        res.render('agregar', {
-                            alert: true,
-                            alertTitle: "Agregado",
-                            alertMessage: "Mascota agregada correctamente",
-                            alertIcon: "success",
-                            showConfirmButton: false,
-                            timer: 2000,
-                            ruta: 'ticket',
-                        })
+                    res.render('agregar', {
+                        alert: true,
+                        alertTitle: "Agregado",
+                        alertMessage: "Mascota agregada correctamente",
+                        alertIcon: "success",
+                        showConfirmButton: false,
+                        timer: 2000,
+                        ruta: 'ticket',
                     })
+                })
 
             })
         })
@@ -248,15 +239,10 @@ function Inorder(tree) { //raiz, luego izquierdo y al ultimo derecho
     if (tree.left) {
         Inorder(tree.left);
     }
-    console.log(tree.value.nombre);
     if (tree.right) {
         Inorder(tree.right);
     }
 }
-
-
-
-
 
 app.get('/ver', (req, res) => {
     if (req.session.loggedin) {
@@ -267,8 +253,6 @@ app.get('/ver', (req, res) => {
             for (i = 0; i < results.length; i++) {
                 req.session.tree.set(results[i]);
             }
-
-            console.log(req.session.tree)
 
             res.render('ver', {
                 login: true,
@@ -284,18 +268,13 @@ app.get('/ver', (req, res) => {
     }
 })
 
-
 app.post('/busqueda', (req, res) => {
 
     var tree = req.session.tree;
 
-
     var busquedaId = req.body.busqueda_id;
 
-    console.log("mi valor sacado del search " + busquedaId + " y mi arbol " + req.session.tree)
-
     function Busqueda(tree, value) {
-        console.log(value + "----" + tree.value.id_mascota)
 
         if (value < tree.value.id_mascota) {
             if (tree.left) {
@@ -304,7 +283,6 @@ app.post('/busqueda', (req, res) => {
             else {
                 tree = null;
                 req.session.busqueda = tree;
-                console.log(req.session.busqueda)
             }
         }
 
@@ -315,21 +293,15 @@ app.post('/busqueda', (req, res) => {
             else {
                 tree = null;
                 req.session.busqueda = tree;
-                console.log(req.session.busqueda)
             }
         }
 
         else if (value == tree.value.id_mascota) {
-
             req.session.busqueda = tree;
-            console.log(tree)
-
         }
     }
 
     Busqueda(tree, busquedaId)
-    console.log("esto esta vacio??")
-    console.log(req.session.busqueda)
 
     res.render('busqueda', {
         login: true,
@@ -386,15 +358,12 @@ app.post('/deletepet', (req, res) => {
 app.get('/administrador', (req, res) => {
     if (req.session.loggedin) {
         if (req.session.administrador == 'si') {
-
             connection.query('Select * from administradores ORDER BY administradores.id ASC;', (error, results) => {
                 res.render('administrador', {
                     usuarios: results,
                     insession: req.session.usuario
                 })
             })
-
-
         }
         else {
             res.render('index', {
@@ -409,11 +378,6 @@ app.get('/administrador', (req, res) => {
             login: false
         })
     }
-})
-
-
-app.get('/register', (req, res) => {
-    res.render('register')
 })
 
 app.post('/registro', async (req, res) => {
@@ -449,9 +413,6 @@ app.post('/registro', async (req, res) => {
 
 //autenticar paginas
 app.get('/', (req, res) => {
-
-
-
     if (req.session.loggedin) {
 
         root = req.session.administrador;
@@ -470,7 +431,6 @@ app.get('/', (req, res) => {
 
         })
     }
-
 })
 
 //salir de la cuenta (logout)

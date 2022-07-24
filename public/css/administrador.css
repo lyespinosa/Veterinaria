@@ -2,9 +2,24 @@ body{
     height: auto;
 }
 
+p{
+    padding: 0;
+    margin: 0;
+}
+
+.btn-pass{
+    user-select: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background: red;
+}
 
 form div{
     margin-top: 60px;
+}
+
+.pass-hide{
+    display: none;
 }
 
 .bi{

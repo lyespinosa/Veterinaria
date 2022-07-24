@@ -45,32 +45,32 @@
                     <h3>Registro de mascota</h3>
                     <div class="mb-2">
                         <label for="especie" class="form-label">Especie</label>
-                        <input type="text" class="form-control" id="especie" name="especie" required />
+                        <input type="text" class="form-control" id="especie" name="especie" autocomplete="off" required />
                     </div>
                     <div class="mb-2">
                         <label for="raza" class="form-label">Raza</label>
-                        <input type="text" class="form-control" id="raza" name="raza" placeholder="Ingrese raza" required="" />
+                        <input type="text" class="form-control" id="raza" name="raza" placeholder="" autocomplete="off" required="" />
                     </div>
                     <div class="mb-2">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="mnombre" name="mnombre" placeholder="" required />
+                        <input type="text" class="form-control" id="mnombre" name="mnombre" placeholder="" autocomplete="off" required />
                     </div>
                     <div class="mb-2">
                         <label for="edad" class="form-label">Edad</label>
-                        <input type="text" class="form-control" id="edad" name="edad" placeholder="" required />
+                        <input type="text" class="form-control" id="edad" name="edad" placeholder="" autocomplete="off" required />
                     </div>
                     <div class="mb-2">
                         <label for="adicional" class="form-label">Informacion adicional</label>
-                        <input type="text" class="form-control" id="adicional" name="adicional"required />
+                        <input type="text" class="form-control" id="adicional" name="adicional" autocomplete="off" required />
                     </div>
                     <div class="mb-2">
                         <% var  datenow = dateFormat(new Date()); %>
                         <label for="fecha_entrada" class="form-label">Fecha de entrada</label>
-                        <input type="date" class="form-control" id="entrada" name="entrada"required min="<%=datenow%>"/>
+                        <input type="date" class="form-control" id="entrada" name="entrada" autocomplete="off" required min="<%=datenow%>"/>
                     </div>
                     <div class="mb-2">
                         <label for="fecha_salida" class="form-label">Fecha de salida</label>
-                        <input type="date" class="form-control" id="salida" name="salida"required min="<%=datenow%>"/>
+                        <input type="date" class="form-control" id="salida" name="salida" autocomplete="off" required min="<%=datenow%>"/>
                     </div>
                     
                 </div>
@@ -78,15 +78,15 @@
                     <h3>Registro de dueño</h3>
                     <div class="mb-2">
                         <label for="dnombre" class="form-label">Nombre del dueño</label>
-                        <input type="text" class="form-control" id="dnombre" name="dnombre" required placeholder="" />
+                        <input type="text" class="form-control" id="dnombre" name="dnombre" autocomplete="off" required placeholder="" />
                     </div>
                     <div class="mb-2">
                         <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="text" class="form-control" id="telefono" name="telefono" required />
+                        <input type="text" class="form-control" id="telefono" name="telefono" autocomplete="off" required />
                     </div>
                     <div class="mb-2">
                         <label for="direccion" class="form-label">Direccion</label>
-                        <input type="text" class="form-control" id="direccion" name="direccion" required />
+                        <input type="text" class="form-control" id="direccion" name="direccion" autocomplete="off" required />
                     </div>
                 </div>
 
