@@ -27,6 +27,12 @@ form div{
     height: 30px;
 }
 
+body.dark .administrador-container > div{
+    transition: 0.2s ease all;
+    background-color: #292d35;
+
+  }
+
 .administrador-container{
     display: flex;
     justify-content: space-evenly;

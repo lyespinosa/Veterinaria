@@ -23,6 +23,13 @@ body {
     margin: 10px;
 }
 
+body.dark .table-container {
+    transition: 0.2s ease all;
+    background-color: #292d35;
+
+}
+
+
 .table-container::-webkit-scrollbar {
     -webkit-appearance: none;
 
@@ -37,12 +44,12 @@ body {
     display: none;
 }
 
- 
+
 .table-container::-webkit-scrollbar-thumb {
     background-color: #02b4cc;
     border-radius: 20px;
     border: 2px solid #f1f2f3;
-    
+
 }
 
 .table-container::-webkit-scrollbar-track {
@@ -57,23 +64,19 @@ th {
 
 
 
-.table{
+.table {
     min-width: 1300px;
     text-align: center;
 }
 
-.search{
+.search {
     width: 50%;
     min-width: 200px;
 }
 
-.td-noresults{
+.td-noresults {
     font-size: 25px;
     text-align: left;
     -webkit-text-stroke: 1px gray;
-    color: white; 
+    color: white;
 }
-
-
-
-

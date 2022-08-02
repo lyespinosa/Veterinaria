@@ -4,13 +4,14 @@
   box-sizing: border-box;
   position: relative;
   font-family: "Roboto", sans-serif;
-  
+  position: relative;
+
 }
 
-a{
+a {
   text-decoration: none;
   color: white;
-  
+
 }
 
 
@@ -19,11 +20,15 @@ body {
   background-color: rgb(245, 245, 245);
 }
 
+
+
 .font-white {
   color: white;
 }
 
-
+input{
+  transition: 0.2s ease all;
+}
 
 .navbar {
   cursor: pointer;
@@ -43,18 +48,18 @@ body {
   padding: 0;
 }
 
-.navbar-home{
+.navbar-home {
   display: flex;
   border-radius: 10px;
   text-align: center;
   padding: 0 8px;
-  
+
 }
 
-.navbar-home:hover{
+.navbar-home:hover {
   background: rgba(255, 255, 255, 0.205);
   filter: brightness(1.05);
-  
+
 }
 
 .navbar img {
@@ -80,14 +85,70 @@ body {
   margin: 0;
 }
 
-.span-hospedaje{
+.switch {
+  position: absolute;
+  right: 20px;
+  background: #343d5b;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  outline: none;
+  transition: .5s ease all;
+
+}
+
+
+
+.switch::after {
+  transition: 0.3s ease all;
+  content: "";
+  width: 47px;
+  height: 47px;
+  position: absolute;
+  background: #f1f1f1;
+  top: 0;
+  left: 0;
+  border-radius: 100px;
+  
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, .2);
+
+}
+
+.switch span {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  display: block;
+  background-color: none;
+  color: #fff;
+
+}
+
+.switch i {
+  font-size: 20px;
+}
+
+
+.switch.active-dark {
+  background-color: orange;
+  color: #000;
+
+}
+
+.switch.active-dark::after {
+  margin-left: 45px;
+}
+
+
+.span-hospedaje {
   color: rgb(255, 60, 0);
   font-weight: bold;
   font-size: 16px;
   padding-left: 5px;
 }
 
-.navbar .btn-back{
+.navbar .btn-back {
   position: absolute;
   top: 15px;
   left: 20px;
@@ -95,11 +156,12 @@ body {
 }
 
 
-.navbar .btn-back:hover{
+.navbar .btn-back:hover {
   color: rgb(22, 22, 22);
 }
 
 .main {
+  transition: 0.2s ease all;
   overflow: hidden;
   /*contenedor principal, no le llame container porque bootstrap le pone estilos*/
   width: 85%;
@@ -111,10 +173,36 @@ body {
   padding-top: 100px;
 }
 
-@media screen and (orientation: portrait){
+body.dark{
+  transition: 0.2s ease all;
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
 
-  .btn-back, .navbar{
-    position: fixed!important;
+body.dark .main{
+  transition: 0.2s ease all;
+  background-color: #181a1e;
+  color: white;
+}
+
+body.dark .table{
+  transition: 0.2s ease all;
+  color: white;
+
+}
+
+body.dark input{
+  color: white;
+  background-color: #292d35;
+}
+
+
+
+@media screen and (orientation: portrait) {
+
+  .btn-back,
+  .navbar {
+    position: fixed !important;
     z-index: 20;
   }
 
@@ -125,7 +213,7 @@ body {
     background-color: white;
   }
 
-  .main{
+  .main {
     box-shadow: none;
     width: 100%;
     height: 1800px;

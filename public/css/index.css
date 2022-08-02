@@ -24,7 +24,11 @@
 
 }
 
-
+body.dark .opcion{
+    color: white;
+    transition: 0.2s ease all;
+    background-color: #292d35;
+  }
 
 .opcion:hover {
     color: black;
@@ -57,7 +61,7 @@
     font-size: 1.5rem;
 }
 
-.bi{
+.btn-back i.bi{
     display: none;
 }
 
@@ -107,7 +111,7 @@
         filter: brightness(0.8);
     }
     
-    .bi{
+    .btn-back i.bi{
 
         color: white;
         font-size: 2rem;
